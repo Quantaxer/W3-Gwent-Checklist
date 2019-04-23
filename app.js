@@ -5,6 +5,9 @@ const app     = express();
 const path    = require("path");
 const fileUpload = require('express-fileupload');
 const {PythonShell} = require('python-shell');
+const mysql = require('mysql');
+const bodyParse = require('body-parser');
+app.use(bodyParse.urlencoded({extended: true}));
 
 app.use(fileUpload());
 
@@ -44,5 +47,66 @@ app.get('/getCardInfo', function(req, res) {
 	script.on('message', function(message) {
 		//Send the JSON to the frontend
 		res.send({x:message});
+	});
+});
+
+let userN;
+let pass;
+let name;
+let host;
+
+let connection = null;
+
+app.post('/fillTables', function(req, res) {
+	userN = req.body.username;
+	pass = req.body.pw;
+	name = req.body.dbName;
+	host = req.body.host;
+	let isErr;
+	connection = mysql.createConnection({
+		host: host,
+		user: userN,
+		password: pass,
+		database: name
+	});
+	connection.connect(function(err) {
+		if (err) {
+			isErr = "badCreds";
+		}
+		else {
+			let script = new PythonShell('scripts/infoToJSON.py');
+			script.on('message', function(message) {
+				//Send the JSON to the frontend
+				connection.query("CREATE TABLE IF NOT EXISTS CARDS (NAME VARCHAR(512) PRIMARY KEY NOT NULL, FACTION VARCHAR(100) NOT NULL, STRENGTH INT NOT NULL, ROWVAL VARCHAR(60) NOT NULL, ABILITY VARCHAR(256) NOT NULL, LOCATION VARCHAR(100) NOT NULL, DESCRIPTION VARCHAR(256) NOT NULL, EXPLANATION VARCHAR(512))", function(err, rows, fields) {
+					if (err) {
+						isErr = "badSQL";
+					}
+					else {
+						let cardList = JSON.parse(message);
+						cardList.forEach(function(card) {
+							connection.query("INSERT INTO CARDS (NAME, FACTION, STRENGTH, ROWVAL, ABILITY, LOCATION, DESCRIPTION, EXPLANATION) VALUES ('" + card.name + "', '" + card.faction + "'," + card.strength + ", '" + card.row + "', '" + card.ability + "','" + card.location + "', '" + card.primaryInfo + "','" + card.secondaryInfo + "')", function(err, results) {
+								if (err) {
+									isErr = "badSQL";
+									console.log("INSERT INTO CARDS (NAME, FACTION, STRENGTH, ROWVAL, ABILITY, LOCATION, DESCRIPTION, EXPLANATION) VALUES ('" + card.name + "', '" + card.faction + "'," + card.strength + ", '" + card.row + "', '" + card.ability + "','" + card.location + "', '" + card.primaryInfo + "','" + card.secondaryInfo + "')");
+								}
+								else {
+									isErr = "good";
+									console.log(card.name);
+								}
+							});
+						});
+					}
+				});
+			});
+		}
+		if (isErr == "good") {
+			res.send("good");
+		}
+		else if (isErr == "badCreds") {
+			res.send("badCred");
+		}
+		else if (isErr == "badSQL"){
+			res.send("badSQL");
+		}
 	});
 });

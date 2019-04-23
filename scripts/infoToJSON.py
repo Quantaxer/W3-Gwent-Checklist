@@ -1,15 +1,15 @@
 import sys, json
 #card object
 class Card(object):
-def __init__(self, faction, name, strength, row, ability, location, primaryInfo, secondaryInfo):
-	self.faction = faction
-	self.name = name
-	self.strength = strength
-	self.row = row
-	self.ability = ability
-	self.location = location
-	self.primaryInfo = primaryInfo
-	self.secondaryInfo = secondaryInfo
+	def __init__(self, faction, name, strength, row, ability, location, primaryInfo, secondaryInfo):
+		self.faction = faction
+		self.name = name
+		self.strength = strength
+		self.row = row
+		self.ability = ability
+		self.location = location
+		self.primaryInfo = primaryInfo
+		self.secondaryInfo = secondaryInfo
 
 #Main program
 if __name__ == "__main__":
