@@ -1,0 +1,31 @@
+{
+  "name": "w3-gwent-checklist",
+  "version": "1.0.0",
+  "description": "Checklist based on the witcher 3 gwent card game",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PHudel/W3-Gwent-Checklist.git"
+  },
+  "keywords": [
+    "Gwent"
+  ],
+  "author": "Peter Hudel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PHudel/W3-Gwent-Checklist/issues"
+  },
+  "homepage": "https://github.com/PHudel/W3-Gwent-Checklist#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-fileupload": "^1.1.4",
+    "fs-extra": "^7.0.1",
+    "http": "0.0.0",
+    "javascript-obfuscator": "^0.18.1",
+    "mysql": "^2.17.1",
+    "nodemon": "^1.18.11"
+  }
+}
