@@ -17,13 +17,22 @@
     <!-- Custom CSS End -->
 </head>
 <body>
-    <form action = '/fillTables' method='post' id = "dbLogin">
-        Username:<br> <input type="text" name="username" id="username" required>
-        <br>Password:<br> <input type="password" name="pw" id = "pw">
-        <br>Database Name:<br> <input type= "text" name="dbName" id = "dbName" required>
-        <br>Host:<br> <input type= "text" name="host" id = "host" required>
-        <br><br><input type = "submit" value = "Login" id = "dbLoginButton">
-    </form>
+	<div id = 'dbCreds'>
+	    <form action = '/fillTables' method='post' id = "dbLogin">
+	        Username:<br> <input type="text" name="username" id="username" required>
+	        <br>Password:<br> <input type="password" name="pw" id = "pw">
+	        <br>Database Name:<br> <input type= "text" name="dbName" id = "dbName" required>
+	        <br>Host:<br> <input type= "text" name="host" id = "host" required>
+	        <br><br><input type = "submit" value = "Login" id = "dbLoginButton">
+	    </form>
+	</div>
+	<div id = 'search' style = "display:none">
+		<form action = '/searchName' method='post' id = "searchName">
+			<input type="text" placeholder="Search.." name="nameToSearch" id = "nameToSearch" required>
+			<input type="submit" id = "searchFor" name= "searchFor">
+		</form>
+	</div>
+
     <script src="/index.js"></script>
 </body>
 </html>

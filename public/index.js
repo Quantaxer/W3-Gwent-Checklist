@@ -12,12 +12,36 @@ $(document).ready(function() {
         event.preventDefault();
         $.ajax({
             type: 'post',
-            url: '/fillTables',
+            url: '/connectToDB',
             dataType: 'html',
             data: {username: $("#username").val(), pw: $("#pw").val(), dbName: $("#dbName").val(), host: $("#host").val()},
             success: function (data) {
-            	console.log("done");
+                $.ajax({
+                    type:'get',
+                    url: 'fillTables',
+                    dataType: 'json',
+                    success: function(data2) {
+                        $("#dbCreds").hide();
+                        $("#search").show();
+                    }
+                });
+
             }
         });
+    });
+
+    $("#searchFor").click(function(event) {
+        console.log($("#nameToSearch").val());
+        event.preventDefault();
+         $.ajax({
+            type: 'post',
+            url: '/searchName',
+            dataType: 'html',
+            data: {name: $("#nameToSearch").val()},
+            success: function (data) {
+                console.log(data);
+            }
+        });
+
     });
 });

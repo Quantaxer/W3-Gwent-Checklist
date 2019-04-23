@@ -57,12 +57,12 @@ let host;
 
 let connection = null;
 
-app.post('/fillTables', function(req, res) {
+app.post('/connectToDB', function(req, res) {
+	let isErr;
 	userN = req.body.username;
 	pass = req.body.pw;
 	name = req.body.dbName;
 	host = req.body.host;
-	let isErr;
 	connection = mysql.createConnection({
 		host: host,
 		user: userN,
@@ -74,39 +74,42 @@ app.post('/fillTables', function(req, res) {
 			isErr = "badCreds";
 		}
 		else {
-			let script = new PythonShell('scripts/infoToJSON.py');
-			script.on('message', function(message) {
-				//Send the JSON to the frontend
-				connection.query("CREATE TABLE IF NOT EXISTS CARDS (NAME VARCHAR(512) PRIMARY KEY NOT NULL, FACTION VARCHAR(100) NOT NULL, STRENGTH INT NOT NULL, ROWVAL VARCHAR(60) NOT NULL, ABILITY VARCHAR(256) NOT NULL, LOCATION VARCHAR(100) NOT NULL, DESCRIPTION VARCHAR(256) NOT NULL, EXPLANATION VARCHAR(512))", function(err, rows, fields) {
-					if (err) {
-						isErr = "badSQL";
-					}
-					else {
-						let cardList = JSON.parse(message);
-						cardList.forEach(function(card) {
-							connection.query("INSERT INTO CARDS (NAME, FACTION, STRENGTH, ROWVAL, ABILITY, LOCATION, DESCRIPTION, EXPLANATION) VALUES ('" + card.name + "', '" + card.faction + "'," + card.strength + ", '" + card.row + "', '" + card.ability + "','" + card.location + "', '" + card.primaryInfo + "','" + card.secondaryInfo + "')", function(err, results) {
-								if (err) {
-									isErr = "badSQL";
-									console.log("INSERT INTO CARDS (NAME, FACTION, STRENGTH, ROWVAL, ABILITY, LOCATION, DESCRIPTION, EXPLANATION) VALUES ('" + card.name + "', '" + card.faction + "'," + card.strength + ", '" + card.row + "', '" + card.ability + "','" + card.location + "', '" + card.primaryInfo + "','" + card.secondaryInfo + "')");
-								}
-								else {
-									isErr = "good";
-									console.log(card.name);
-								}
-							});
-						});
-					}
+			isErr = "good";
+		}
+		res.send(isErr);
+	});
+});
+
+app.get('/fillTables', function(req, res) {
+	let script = new PythonShell('scripts/infoToJSON.py');
+	script.on('message', function(message) {
+		//Send the JSON to the frontend
+		connection.query("CREATE TABLE IF NOT EXISTS CARDS (NAME VARCHAR(512) PRIMARY KEY NOT NULL, FACTION VARCHAR(100) NOT NULL, STRENGTH INT NOT NULL, ROWVAL VARCHAR(60) NOT NULL, ABILITY VARCHAR(256) NOT NULL, LOCATION VARCHAR(100) NOT NULL, OWNED BOOLEAN NOT NULL, DESCRIPTION VARCHAR(256) NOT NULL, EXPLANATION VARCHAR(512))", function(err, rows, fields) {
+			if (!err) {
+				let cardList = JSON.parse(message);
+				cardList.forEach(function(card) {
+					connection.query("INSERT INTO CARDS (NAME, FACTION, STRENGTH, ROWVAL, ABILITY, LOCATION, OWNED, DESCRIPTION, EXPLANATION) VALUES ('" + card.name + "', '" + card.faction + "'," + card.strength + ", '" + card.row + "', '" + card.ability + "','" + card.location + "', '" + card.owned + "', '" + card.primaryInfo + "','" + card.secondaryInfo + "')", function(err, results) {
+						if (err) {
+							console.log("B");
+						}
+					});
 				});
-			});
+				res.send({done: "good"});
+			}
+		});
+	});
+});
+
+app.post('/searchName', function(req, res) {
+	let val = req.body.name;
+	console.log("SELECT * FROM CARDS WHERE (name = '" + val + "')");
+
+	connection.query("SELECT * FROM CARDS WHERE (name = '" + val + "')", function(err, rows, fields) {
+		if (err) {
+			res.send({err: "nothing found"});
 		}
-		if (isErr == "good") {
-			res.send("good");
-		}
-		else if (isErr == "badCreds") {
-			res.send("badCred");
-		}
-		else if (isErr == "badSQL"){
-			res.send("badSQL");
+		else {
+			res.send({err: rows});
 		}
 	});
 });
