@@ -17,7 +17,7 @@
     <!-- Custom CSS End -->
 </head>
 <body>
-	<div id = 'dbCreds'>
+	<div id = 'loginScreen'>
 	    <form action = '/fillTables' method='post' id = "dbLogin">
 	        Username:<br> <input type="text" name="username" id="username" required>
 	        <br>Password:<br> <input type="password" name="pw" id = "pw">
@@ -26,7 +26,7 @@
 	        <br><br><input type = "submit" value = "Login" id = "dbLoginButton">
 	    </form>
 	</div>
-	<div id = 'search' style = "display:none">
+	<div id = 'checklistScreen' style = "display:none">
 		<form action = '/searchName' method='post' id = "searchName">
 			<input type="text" placeholder="Search.." name="nameToSearch" id = "nameToSearch" required>
 			<input type="submit" id = "searchFor" name= "searchFor">

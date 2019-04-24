@@ -1,44 +1,50 @@
 $(document).ready(function() {
-	//Runs as soon as the page is loaded: runs the python script and gets all the card info from the .csv file
-	/*$.ajax({
-		type: 'get',            
-        dataType: 'json',
-        url: '/getCardInfo',
-        success: function (data) {
-        	console.log(data);
-        }
-	});*/
+	
+    //Runs when the user submits the database login form
 	$("#dbLoginButton").click(function(event) {
+        //Prevent the post request from refreshing
         event.preventDefault();
         $.ajax({
             type: 'post',
             url: '/connectToDB',
             dataType: 'html',
+            //Send in the form data
             data: {username: $("#username").val(), pw: $("#pw").val(), dbName: $("#dbName").val(), host: $("#host").val()},
             success: function (data) {
-                $.ajax({
-                    type:'get',
-                    url: 'fillTables',
-                    dataType: 'json',
-                    success: function(data2) {
-                        $("#dbCreds").hide();
-                        $("#search").show();
-                    }
-                });
-
+                //Check if they were not able to connect to the database
+                if (data == "badCreds") {
+                    alert("Error connecting to the server, check credentials");
+                }
+                else {
+                    //If it is connected, fill the tables up boiiiii
+                    $.ajax({
+                        type:'get',
+                        url: 'fillTables',
+                        dataType: 'json',
+                        success: function(data2) {
+                            //When all the tables have filled, remove the login screen and show the main screen
+                            $("#loginScreen").hide();
+                            $("#checklistScreen").show();
+                        }
+                    });
+                }
             }
         });
     });
 
+    //Function for the search bar
     $("#searchFor").click(function(event) {
-        console.log($("#nameToSearch").val());
+        //Prevent the post from refreshing
         event.preventDefault();
+
          $.ajax({
             type: 'post',
             url: '/searchName',
             dataType: 'html',
+            //Send in the form data
             data: {name: $("#nameToSearch").val()},
             success: function (data) {
+                //TODO: do stuff with results
                 console.log(data);
             }
         });
