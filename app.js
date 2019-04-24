@@ -25,7 +25,6 @@ app.get('/',function(req,res){
 
 //Send Style
 app.get('/style.css',function(req,res){
- 	//Feel free to change the contents of style.css to prettify your Web app
   	res.sendFile(path.join(__dirname+'/public/style.css'));
 });
 
@@ -37,6 +36,10 @@ app.get('/index.js',function(req,res){
 	    res.send(minimizedContents._obfuscatedCode);
 	});
 });
+
+//Code for the path of the images in Assets
+var publicDir = path.join(__dirname,'/Assets');
+app.use(express.static(publicDir));
 
 //Run at the specified port
 app.listen(portNum);

@@ -85,6 +85,8 @@ function updateTotalChecked() {
     });
 }
 
+let selectedRow;
+
 //Main event listeners go here
 $(document).ready(function() {
     //Runs when the user submits the database login form
@@ -130,14 +132,31 @@ $(document).ready(function() {
         });
     });
 
-    //Update database when a checkbox was changed
+    //Update database when a row was checked
     $(document).on("click", "#tableOfCards tr td", function(e) {
         //Get the checkbox value
         let check = this.firstChild.checked;
-        //Check if the person actually clicked on the checkbox
+        //Get the information for the selected card
+        let name = document.getElementById('tableOfCards').rows[this.parentElement.rowIndex].cells[1].firstChild.data;
+        let faction = document.getElementById('tableOfCards').rows[this.parentElement.rowIndex].cells[2].firstChild.data;
+        let strength = document.getElementById('tableOfCards').rows[this.parentElement.rowIndex].cells[3].firstChild.data;
+        let ability = document.getElementById('tableOfCards').rows[this.parentElement.rowIndex].cells[4].firstChild.data;
+        let row = document.getElementById('tableOfCards').rows[this.parentElement.rowIndex].cells[5].firstChild.data;
+
+        //Create the url for the image and set it
+        let url = faction + '/' + name + '.png';
+        $("#cardPic").attr('src', url);
+        //Set all other information for the selected card
+        document.getElementById('cardName').innerHTML = "Name: " + name;
+        document.getElementById('cardFaction').innerHTML = "Faction: " + faction;
+        document.getElementById('cardStrength').innerHTML = "Strength: " + strength;
+        document.getElementById('cardAbility').innerHTML = "Ability: " + ability;
+        document.getElementById('cardRow').innerHTML = "Row: " + row;
+        $("#selectedText").show();
+
+        //Check if the person clicked on the checkbox
         if ((this.firstChild.checked == true)|| (this.firstChild.checked == false)) {
             //Get the name of the card to update the value
-            let name = document.getElementById('tableOfCards').rows[this.parentElement.rowIndex].cells[1].firstChild.data;
             $.ajax({
                 type: 'get',
                 url: '/updateOwned',

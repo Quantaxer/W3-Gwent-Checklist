@@ -48,7 +48,7 @@ Neutral,Commander''s Horn (1 of 3),0,Special,Double the strength of Row,Velen,0,
 Neutral,Decoy (2 of 3),0,Special,Swap with a non-Hero card,Velen,0,Buy from Trader,Quartermaster''s Store in Crow''s Perch
 Neutral,Scorch (2 of 3),0,Special,Destroys the strongest Non-Hero Card,Skellige,0,Buy from Trader,Innkeeper at the New Port Inn in Kaer Trolde Harbor
 Neutral,Scorch (3 of 3),0,Special,Destroys the strongest Non-Hero Card,Skellige,0,Buy from Trader,Innkeeper at Urialla Village in An Skellig
-Neutral,Avallac''h (A.K.A Mysterious Elf),0,Melee,Spy and Immune to special,Skellige,0,Gwent: Skellige Style,Gremita at Gedyneith in Ard Skellig
+Neutral,Mysterious Elf,0,Melee,Spy and Immune to special,Skellige,0,Gwent: Skellige Style,Gremita at Gedyneith in Ard Skellig
 Neutral,Emiel Regis Rohellec Terzieff,5,Melee,None,Random,0,Win from NPC,Randomly earned
 Neutral,Villentretenmerth,7,Melee,Destroy oppon Strongest Melee if Melee+10,Random,0,Win from NPC,Randomly earned
 Neutral,Biting Frost (3 of 3),0,Weather,Sets all Non-Hero melee to 1,Random,0,Win from NPC,Randomly earned
@@ -111,7 +111,7 @@ Nilfgaard,Morvran Voorhis,10,Siege,Immune to special ,Novigrad,0,Gwent: Big City
 Nilfgaard,Tibor Eggebracht,10,Range,Immune to special ,Novigrad,0,Gwent: Playing Innkeeps,Olivier at the Kingfisher Inn
 Nilfgaard,Fringilla Vigo,6,Range,None,Novigrad,0,Quest: A Dangerous Game,Found at Caesar Bilzen''s home
 Nilfgaard,Emhyr var Emreis the Relentless,0,Leader,Draw card from opp Discard,Novigrad,0,Quest: High Stakes,Won from Sasha
-Nilfgaard,Emhry var Emrels His Imperial Majesty,0,Leader,Rain,Base Deck,1,Included at start of game,
+Nilfgaard,Emhyr var Emreis His Imperial Majesty,0,Leader,Rain,Base Deck,1,Included at start of game,
 Northern Realms,Blue Stripes Commando (1 of 3),4,Melee,Bond,White Orchard,0,Buy from Trader,Innkeeper in the White Orchard Tavern or Trader outside
 Northern Realms,Catapult (1 of 2),8,Siege,Bond,White Orchard,0,Buy from Trader,Innkeeper in the White Orchard Tavern or Trader outside
 Northern Realms,Crinfrid Reavers Dragon Hunter (1 of 3),5,Range,Bond,White Orchard,0,Buy from Trader,Innkeeper in the White Orchard Tavern or Trader outside
@@ -122,7 +122,8 @@ Northern Realms,Poor Fucking Infantry (3 of 3),1,Melee,Bond,Velen,0,Buy from Tra
 Northern Realms,Sigismund Dijkstra,4,Melee,Spy,Velen,0,Gwent: Velen Players,Bloody Baron in Crow''s Perch
 Northern Realms,Vernon Roche,10,Melee,Immune to special,Velen,0,Gwent: Velen Players,Hadko the Card Prodigy in Midcopse
 Northern Realms,Thaler,1,Siege,Spy,Skellige,0,Buy from Trader,Innkeeper in Arinbjorn
-Northern Realms,Siege Tower,6,Siege,None,Random,0,Win from NPC,Randomly Earned
+Northern Realms,Siege Tower (1 of 2),6,Siege,None,Random,0,Win from NPC,Randomly Earned
+Northern Realms,Siege Tower (2 of 2),6,Siege,None,Random,0,Win from NPC,Randomly Earned
 Northern Realms,Philippa Eilhart,10,Range,Immune to special,Random,0,Win from NPC,Randomly Earned
 Northern Realms,Foltest the Siegemaster,0,Leader,Horn on Siege,Palace of Vizima,0,Vizima Palace Couryard,Beat Nilfgaardian Nobleman
 Northern Realms,Catapult (2 of 2),8,Siege,Bond,Novigrad,0,Buy from Trader,Marquise Serenity in Passiflora
@@ -143,7 +144,7 @@ Northern Realms,Prince Stennis,5,Melee,Spy,Base Deck,1,Included at start of game
 Northern Realms,Redanian Foot Soldier (1 of 2),1,Melee,None,Base Deck,1,Included at start of game,
 Northern Realms,Redanian Foot Soldier (2 of 2),1,Melee,None,Base Deck,1,Included at start of game,
 Northern Realms,Sabrina Glevissig,4,Range,None,Base Deck,1,Included at start of game,
-Northern Realms,Sheldon Skaggs,4,Range,None,Base Deck,1,Included at start of game,
+Northern Realms,Shelden Skaggs,4,Range,None,Base Deck,1,Included at start of game,
 Northern Realms,Siegfried of Denesle,5,Melee,None,Base Deck,1,Included at start of game,
 Northern Realms,Sile de Tansarville,5,Range,None,Base Deck,1,Included at start of game,
 Northern Realms,Trebuchet (1 of 2),6,Siege,None,Base Deck,1,Included at start of game,
@@ -188,12 +189,11 @@ Scoia''tael,Mahakaman Defender (1 of 5),5,Melee,None, Novigrad,0,Buy from Trader
 Scoia''tael,Mahakaman Defender (2 of 5),5,Melee,None, Novigrad,0,Buy from Trader,Innkeeper at the Golden Sturgeon
 Scoia''tael,Mahakaman Defender (5 of 5),5,Melee,None, Novigrad,0,Buy from Trader,Marquise Serenity in Passiflora
 Scoia''tael,Vrihedd Brigade Veteran (2 of 2),5,Melee / Range,Agile, Novigrad,0,Buy from Trader,Olivier in the Kingfisher Inn
-Scoia''tael,Eithne?,10,Range,Immune to special,Novigrad,0,Gwent: Old Pals,Zoltan in Rosemary and Thyme
+Scoia''tael,Eithne,10,Range,Immune to special,Novigrad,0,Gwent: Old Pals,Zoltan in Rosemary and Thyme
 Scoia''tael,Francesca Findabair the Beautiful,0,Leader,Horn on Ranged, Novigrad,0,Gwent: Big City Players,Reward for completing this quest
 Scoia''tael,Isengrim Faolitarna,10,Melee,Morale and Immune to Special, Novigrad,0,Quest: A Dangerous Game,Inside Zed''s home
 Scoia''tael,Francesca Findabair Queen of Dol Blathanna,0,Leader,Scorch Close Combat if + 10 , Novigrad,0,High Stakes,Won from Finneas
 Skellige,Berserker,4,Melee,Berserker,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
-Skellige,Berserker- transformed,14,Melee,Morale,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
 Skellige,Birna Bran,2,Melee,Medic,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
 Skellige,Blueboy Lugos,6,Melee,None,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
 Skellige,Cerys,10,Melee,Muster (Clan Drummond Shield Maiden),Toussaint,0,Win from NPC,The inkeep at Barrel and Bung Inn in Flovive
@@ -203,12 +203,12 @@ Skellige,Clan an Craite Warrior (3 of 3),6,Melee,Bond,DLC Base Deck,0,Starter pa
 Skellige,Clan Brokvar Archer (1 of 3),6,Range,None,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
 Skellige,Clan Brokvar Archer (2 of 3),6,Range,None,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
 Skellige,Clan Brokvar Archer (3 of 3),6,Range,None,Toussaint,0,Win from NPC,The herbalist at Castel Ravello Vineyard
-Skellige,Clan Dimum Pirate,6,Range,Scorch,Toussaint,0,Win from NPC,Merchant next to the Grandmaster Smith shop
+Skellige,Clan Dimun Pirate,6,Range,Scorch,Toussaint,0,Win from NPC,Merchant next to the Grandmaster Smith shop
 Skellige,Clan Drummond Shield Maiden (1 of 3),4,Melee,Bond,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
 Skellige,Clan Drummond Shield Maiden (2 of 3),4,Melee,Bond,Toussaint,0,Win from NPC,The Innkeeper of The Cockatrice Inn
 Skellige,Clan Drummond Shield Maiden (3 of 3),4,Melee,Bond,Toussaint,0,Win from NPC,The Armorer in Francollarts (town SE of Beauclair)
 Skellige,Clan Heymaey Skald,4,Melee,None,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
-Skellige,Clan Tordarroch armorsmith,4,Melee,None,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
+Skellige,Clan Tordarroch Armorsmith,4,Melee,None,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
 Skellige,Donar an Hindar,4,Melee,None,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
 Skellige,Draig Bon-Dhu,2,Siege,Commander''s horn,Toussaint,0,Win from NPC,The innkeeper of the Pheasantry
 Skellige,Ermion,8,Range,Mardroeme,Toussaint,0,Win from NPC,The Scarlet Cardinal Inn Inkeepress at Francollarts
@@ -224,9 +224,9 @@ Skellige,Mardroeme (1 of 3),0,Special,Berserker transformation,DLC Base Deck,0,S
 Skellige,Mardroeme (2 of 3),0,Special,Berserker transformation,Toussaint,0,Win from NPC,The Herbalist just east of Grandmaster Smith in Beauclair
 Skellige,Mardroeme (3 of 3),0,Special,Berserker transformation,Toussaint,0,Win from NPC,Madame at The Belles of Beauclair inkeep
 Skellige,Olaf,12,Melee / Range,Morale,Toussaint,0,Win from NPC,The innkeeper of the Adder and Jewels Winery
-Neutral,Skellige storm (1 of 3),0,Special,Sets all non-hero range and siege to 1,Toussaint,0,Win from NPC,The Quartermaster at the Tourney Grounds
-Neutral,Skellige storm (2 of 3),0,Special,Sets all non-hero range and siege to 1,Toussaint,0,Win from NPC,The barber at the Tourney Grounds
-Neutral,Skellige storm (3 of 3),0,Special,Sets all non-hero range and siege to 1,Toussaint,0,Win from NPC,The Butcher in the San Sebastian district
+Neutral,Skellige Storm (1 of 3),0,Special,Sets all non-hero range and siege to 1,Toussaint,0,Win from NPC,The Quartermaster at the Tourney Grounds
+Neutral,Skellige Storm (2 of 3),0,Special,Sets all non-hero range and siege to 1,Toussaint,0,Win from NPC,The barber at the Tourney Grounds
+Neutral,Skellige Storm (3 of 3),0,Special,Sets all non-hero range and siege to 1,Toussaint,0,Win from NPC,The Butcher in the San Sebastian district
 Skellige,Svanrige,4,Melee,None,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
 Skellige,Udalryk,4,Melee,None,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
 Skellige,War Longship (1 of 3),6,Siege,Bond,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
@@ -235,7 +235,6 @@ Skellige,War Longship (3 of 3),6,Siege,Bond,Toussaint,0,Win from NPC,The innkeep
 Skellige,Young Berserker (1 of 3),2,Range,Berserker,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
 Skellige,Young Berserker (2 of 3),2,Range,Berserker,Toussaint,0,Win from NPC,Pierre the tailor at the western part of the Beauclair
 Skellige,Young Berserker (3 of 3),2,Range,Berserker,Toussaint,0,Win from NPC,Blacksmith at the Tourney Grounds
-Skellige,Young Berserker - Transformed,8,Range,Bond,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
 Skellige,Crach an Craite,0,Leader,All cards from discard piles back to decks,DLC Base Deck,0,Starter pack,Find Count Monnier in Beauclair
 Skellige,King Bran,0,Leader,Own Units lose only half of their strength in bad weather,Toussaint,0,Win from NPC,Ducal Camerlengo in Beauclair
 Neutral,Gaunter O''Dimm,2,Siege,Muster,Novigrad (Oxenfurt),0,Win from NPC,Hilbert at the Auction House.
@@ -245,7 +244,7 @@ Neutral,Gaunter O''Dimm: Darkness (3 of 3),4,Range,Muster,Novigrad,0,Buy from Tr
 Neutral,Olgierd von Everec,6,Melee/ Range,Morale,Novigrad,0,Win from NPC,Shani in Oxenfurt
 Scoia''tael,Schirru,8,Siege,Scorch Siege if +10,Novigrad,0,Win from NPC,Merchant at circus camp near Carsten
 Monsters,Toad,7,Range,Scorch range if +10,Novigrad,0,Win from NPC,Olgierd
-Monsters,Eredin The Treacherous,0,Leader,Passive: doubles strength of all spies.,Novigrad,0,Buy from Trader,Trader at Upper Mill
+Monsters,Eredin Breacc Glas The Treacherous,0,Leader,Passive: doubles strength of all spies.,Novigrad,0,Buy from Trader,Trader at Upper Mill
 Scoia''tael,Francesca Findabair Hope of the Aen Seidhe,0,Leader,Move agile units to optimal row,Novigrad,0,Buy from Trader,Trader at Upper Mill
 Nilfgaard,Emhyr var Emreis Invader of The North,0,Leader,Restore units,Novigrad,0,Buy from Trader,Trader west of Vegelbud Residence
 Northern Realms,Foltest Son of Medell,0,Leader,Scorch Range if +10,Novigrad,0,Buy from Trader,Trader west of Vegelbud Residence

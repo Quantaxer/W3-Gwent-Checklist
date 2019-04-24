@@ -11,3 +11,21 @@ body {
     line-height: 1.75;
     background-color: #FFFFFF;
 }
+
+table {
+    table-layout: fixed;
+    font-family: sans-serif;
+    display: block;
+    height: 400px;
+}
+
+table tbody { 
+	width: 70%; 
+	height:600px; 
+	overflow-y:scroll; 
+	display:block; 
+}
+
+table thead { 
+	display:block;
+}
