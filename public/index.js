@@ -60,6 +60,7 @@ function fillUpTable(list) {
     }
 }
 
+//Helper function to update the table after submitting a search parameter
 function updateMainTable(faction) {
     $.ajax({
         type: 'get',
@@ -67,7 +68,19 @@ function updateMainTable(faction) {
         dataType: 'json',
         data: ({fact: faction}),
         success: function(data) {
+            //Use results of the query to update the table
             fillUpTable(data);
+        }
+    });
+}
+
+function updateTotalChecked() {
+    $.ajax({
+        type: 'get',
+        url: '/getTotalChecked',
+        dataType: 'json',
+        success: function(data) {
+            document.getElementById('totalChecked').innerHTML = "Total cards owned: " + data.num + "/252";
         }
     });
 }
@@ -104,6 +117,7 @@ $(document).ready(function() {
                                 success: function(data3) {
                                     //Populate the main table
                                     fillUpTable(data3);
+                                    updateTotalChecked();
                                     //Hide the login screen and display the main program
                                     $("#loginScreen").hide();
                                     $("#checklistScreen").show();
@@ -129,13 +143,11 @@ $(document).ready(function() {
                 url: '/updateOwned',
                 data:({ownVal: check, nameVal: name}),
                 success: function(data) {
-                    console.log("done!");
+                    updateTotalChecked();
                 }
             });
         }
     });
-
-
 
     $("#all").click(function(event) {
         updateMainTable("all");
@@ -169,7 +181,6 @@ $(document).ready(function() {
     $("#searchFor").click(function(event) {
         //Prevent the post from refreshing
         event.preventDefault();
-
          $.ajax({
             type: 'post',
             url: '/searchName',

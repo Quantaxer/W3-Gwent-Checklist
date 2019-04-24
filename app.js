@@ -129,15 +129,18 @@ app.get('/updateOwned', function(req, res) {
 		if (err) {
 			console.log("UPDATE CARDS SET OWNED = " + newOwned + " WHERE NAME = '" + name + "'");
 		}
+		else {
+			res.send("done");
+		}
 	});
 });
 
+//endpoint that is called when a user hits a button to search by faction
 app.get('/sortTable', function(req, res) {
 	let faction = req.query.fact;
+	//Check if the user selected the all button
 	if (faction == "all") {
-		//Query gets the specific card
 		connection.query("SELECT * FROM CARDS ORDER BY FACTION, NAME", function(err, rows, fields) {
-			//Return the row if it exists in the database
 			if (err) {
 				res.send({err: "nothing found"});
 			}
@@ -146,6 +149,7 @@ app.get('/sortTable', function(req, res) {
 			}
 		});
 	}
+	//Otherwise use the selected faction in the query
 	else {
 		connection.query("SELECT * FROM CARDS WHERE (FACTION = '" + faction + "') ORDER BY NAME", function(err, rows, fields) {
 			if (err) {
@@ -156,6 +160,14 @@ app.get('/sortTable', function(req, res) {
 			}
 		});
 	}
+});
+
+app.get('/getTotalChecked', function(req, res) {
+	connection.query("SELECT * FROM CARDS WHERE (OWNED = 1)", function(err, rows, fields) {
+		if (!err) {
+			res.send({num: rows.length});
+		}
+	});
 });
 
 //Function that runs when the user searches for a certain card by the name
