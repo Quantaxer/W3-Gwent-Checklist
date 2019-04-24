@@ -99,9 +99,7 @@ app.get('/fillTables', function(req, res) {
 				//Iterate through the lsit of cards, and add each one to the database
 				cardList.forEach(function(card) {
 					connection.query("INSERT INTO CARDS (NAME, FACTION, STRENGTH, ROWVAL, ABILITY, LOCATION, OWNED, DESCRIPTION, EXPLANATION) VALUES ('" + card.name + "', '" + card.faction + "'," + card.strength + ", '" + card.row + "', '" + card.ability + "','" + card.location + "', '" + card.owned + "', '" + card.primaryInfo + "','" + card.secondaryInfo + "')", function(err, results) {
-						if (err) {
-							console.log("B");
-						}
+						
 					});
 				});
 				//Tell the front end it is finished
@@ -111,8 +109,9 @@ app.get('/fillTables', function(req, res) {
 	});
 });
 
+//Query to populate the table upon logging in
 app.get('/populateInitialTable', function(req, res) {
-	connection.query("SELECT * FROM CARDS", function(err, rows, fields) {
+	connection.query("SELECT * FROM CARDS ORDER BY FACTION, NAME", function(err, rows, fields) {
 		if (err) {
 			console.log("aww heck");
 		}
@@ -122,6 +121,7 @@ app.get('/populateInitialTable', function(req, res) {
 	});
 });
 
+//Query to update a row in the db if the userclicks a checkbox
 app.get('/updateOwned', function(req, res) {
 	let newOwned = req.query.ownVal;
 	let name = req.query.nameVal;
@@ -130,6 +130,32 @@ app.get('/updateOwned', function(req, res) {
 			console.log("UPDATE CARDS SET OWNED = " + newOwned + " WHERE NAME = '" + name + "'");
 		}
 	});
+});
+
+app.get('/sortTable', function(req, res) {
+	let faction = req.query.fact;
+	if (faction == "all") {
+		//Query gets the specific card
+		connection.query("SELECT * FROM CARDS ORDER BY FACTION, NAME", function(err, rows, fields) {
+			//Return the row if it exists in the database
+			if (err) {
+				res.send({err: "nothing found"});
+			}
+			else {
+				res.send(rows);
+			}
+		});
+	}
+	else {
+		connection.query("SELECT * FROM CARDS WHERE (FACTION = '" + faction + "') ORDER BY NAME", function(err, rows, fields) {
+			if (err) {
+				console.log("SELECT * FROM CARDS WHERE (FACTION = '" + faction + "') ORDER BY NAME");
+			}
+			else {
+				res.send(rows);
+			}
+		});
+	}
 });
 
 //Function that runs when the user searches for a certain card by the name

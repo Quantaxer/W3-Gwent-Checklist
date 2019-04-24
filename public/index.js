@@ -60,6 +60,18 @@ function fillUpTable(list) {
     }
 }
 
+function updateMainTable(faction) {
+    $.ajax({
+        type: 'get',
+        url: '/sortTable',
+        dataType: 'json',
+        data: ({fact: faction}),
+        success: function(data) {
+            fillUpTable(data);
+        }
+    });
+}
+
 //Main event listeners go here
 $(document).ready(function() {
     //Runs when the user submits the database login form
@@ -106,8 +118,11 @@ $(document).ready(function() {
 
     //Update database when a checkbox was changed
     $(document).on("click", "#tableOfCards tr td", function(e) {
+        //Get the checkbox value
         let check = this.firstChild.checked;
+        //Check if the person actually clicked on the checkbox
         if ((this.firstChild.checked == true)|| (this.firstChild.checked == false)) {
+            //Get the name of the card to update the value
             let name = document.getElementById('tableOfCards').rows[this.parentElement.rowIndex].cells[1].firstChild.data;
             $.ajax({
                 type: 'get',
@@ -118,6 +133,36 @@ $(document).ready(function() {
                 }
             });
         }
+    });
+
+
+
+    $("#all").click(function(event) {
+        updateMainTable("all");
+    });
+
+    $("#monsters").click(function(event) {
+        updateMainTable("Monsters");
+    });
+
+    $("#neutral").click(function(event) {
+        updateMainTable("Neutral");
+    });
+
+    $("#northernRealms").click(function(event) {
+        updateMainTable("Northern Realms");
+    });
+
+    $("#nilfgaard").click(function(event) {
+        updateMainTable("Nilfgaard");
+    });
+
+    $("#scoia").click(function(event) {
+        updateMainTable("Scoia''tael");
+    });
+
+    $("#skellige").click(function(event) {
+        updateMainTable("Skellige");
     });
 
     //Function for the search bar
@@ -132,7 +177,7 @@ $(document).ready(function() {
             //Send in the form data
             data: {name: $("#nameToSearch").val()},
             success: function (data) {
-                //TODO: do stuff with results
+                //do stuff with results
                 result = JSON.parse(data);
                 fillUpTable(result);
             }
