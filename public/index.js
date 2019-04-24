@@ -20,6 +20,7 @@ function fillUpTable(list) {
             let value = document.createElement("INPUT");
             value.type = "checkbox";
             value.checked = card.OWNED;
+            value.className = "owned";
             cell.appendChild(value);
 
             let cell1 = row.insertCell(1);
@@ -103,8 +104,21 @@ $(document).ready(function() {
         });
     });
 
-    //Functions to display which faction to show go here
-    
+    //Update database when a checkbox was changed
+    $(document).on("click", "#tableOfCards tr td", function(e) {
+        let check = this.firstChild.checked;
+        if ((this.firstChild.checked == true)|| (this.firstChild.checked == false)) {
+            let name = document.getElementById('tableOfCards').rows[this.parentElement.rowIndex].cells[1].firstChild.data;
+            $.ajax({
+                type: 'get',
+                url: '/updateOwned',
+                data:({ownVal: check, nameVal: name}),
+                success: function(data) {
+                    console.log("done!");
+                }
+            });
+        }
+    });
 
     //Function for the search bar
     $("#searchFor").click(function(event) {

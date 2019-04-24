@@ -122,6 +122,16 @@ app.get('/populateInitialTable', function(req, res) {
 	});
 });
 
+app.get('/updateOwned', function(req, res) {
+	let newOwned = req.query.ownVal;
+	let name = req.query.nameVal;
+	connection.query("UPDATE CARDS SET OWNED = " + newOwned + " WHERE NAME = '" + name + "'", function(err, results) {
+		if (err) {
+			console.log("UPDATE CARDS SET OWNED = " + newOwned + " WHERE NAME = '" + name + "'");
+		}
+	});
+});
+
 //Function that runs when the user searches for a certain card by the name
 app.post('/searchName', function(req, res) {
 	let val = req.body.name;
