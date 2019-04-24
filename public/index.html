@@ -27,10 +27,33 @@
 	    </form>
 	</div>
 	<div id = 'checklistScreen' style = "display:none">
+		<div id = 'factionButtons'>
+			<button id = 'all'>All</button>
+			<button id = 'monsters'>Monsters</button>
+			<button id = 'neutral'>Neutral</button>
+			<button id = 'nilfgaard'>Nilfgaard</button>
+			<button id = 'northern realms'>Northern Realms</button>
+			<button id = 'skellige'>Skellige</button>
+		</div>
 		<form action = '/searchName' method='post' id = "searchName">
 			<input type="text" placeholder="Search.." name="nameToSearch" id = "nameToSearch" required>
 			<input type="submit" id = "searchFor" name= "searchFor">
 		</form>
+		<div id = table>
+			<table id = 'tableOfCards'>
+				<tr>
+					<th>Owned</th>
+					<th>Card Name</th>
+					<th>Faction</th>
+					<th>Strength</th>
+					<th>Ability</th>
+					<th>Row</th>
+					<th>Location of Card</th>
+					<th>How to obtain card</th>
+					<th>Explanation</th>
+				</tr>
+			</table>
+		</div>
 	</div>
 
     <script src="/index.js"></script>

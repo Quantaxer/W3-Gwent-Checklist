@@ -111,6 +111,17 @@ app.get('/fillTables', function(req, res) {
 	});
 });
 
+app.get('/populateInitialTable', function(req, res) {
+	connection.query("SELECT * FROM CARDS", function(err, rows, fields) {
+		if (err) {
+			console.log("aww heck");
+		}
+		else {
+			res.send(rows);
+		}
+	});
+});
+
 //Function that runs when the user searches for a certain card by the name
 app.post('/searchName', function(req, res) {
 	let val = req.body.name;
@@ -121,7 +132,7 @@ app.post('/searchName', function(req, res) {
 			res.send({err: "nothing found"});
 		}
 		else {
-			res.send({err: rows});
+			res.send(rows);
 		}
 	});
 });
