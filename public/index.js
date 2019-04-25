@@ -39,19 +39,30 @@ function fillUpTable(list) {
             let value4 = document.createTextNode(card.ABILITY);
             cell4.appendChild(value4);
 
-            let cell5 = row.insertCell(5);
+            let cell9 = row.insertCell(5);
+            let hVal;
+            if (card.HERO == 1) {
+                hVal = "Yes";
+            }
+            else {
+                hVal = "No";
+            }
+            let value9 = document.createTextNode(hVal);
+            cell9.appendChild(value9);
+
+            let cell5 = row.insertCell(6);
             let value5 = document.createTextNode(card.ROWVAL);
             cell5.appendChild(value5);
 
-            let cell6 = row.insertCell(6);
+            let cell6 = row.insertCell(7);
             let value6 = document.createTextNode(card.LOCATION);
             cell6.appendChild(value6);
 
-            let cell7 = row.insertCell(7);
+            let cell7 = row.insertCell(8);
             let value7 = document.createTextNode(card.DESCRIPTION);
             cell7.appendChild(value7);
 
-            let cell8 = row.insertCell(8);
+            let cell8 = row.insertCell(9);
             let value8 = document.createTextNode(card.EXPLANATION);
             cell8.appendChild(value8);
 
@@ -80,7 +91,7 @@ function updateTotalChecked() {
         url: '/getTotalChecked',
         dataType: 'json',
         success: function(data) {
-            document.getElementById('totalChecked').innerHTML = "Total cards owned: " + data.num + "/252";
+            document.getElementById('totalChecked').innerHTML = "Total cards owned: " + data.num + "/251";
         }
     });
 }
@@ -202,9 +213,10 @@ $(document).ready(function() {
             type: 'post',
             url: '/advancedSearch',
             dataType: 'html',
-            data: {f: $("#factionList").val(), s: $("#strengthList").val(), r: $("#rowList").val(), o:$("#ownedList").val()},
+            data: {f: $("#factionList").val(), s: $("#strengthList").val(), r: $("#rowList").val(), o:$("#ownedList").val(), h: $("#heroList").val(), a: $("#abilityList").val()},
             success: function (data) {
-
+                result = JSON.parse(data);
+                fillUpTable(result);
             }
         });
     })

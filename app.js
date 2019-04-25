@@ -96,12 +96,12 @@ app.get('/fillTables', function(req, res) {
 	let script = new PythonShell('scripts/infoToJSON.py');
 	script.on('message', function(message) {
 		//Create the table of cards, but only if it isn't already there
-		connection.query("CREATE TABLE IF NOT EXISTS CARDS (NAME VARCHAR(512) PRIMARY KEY NOT NULL, FACTION VARCHAR(100) NOT NULL, STRENGTH INT NOT NULL, ROWVAL VARCHAR(60) NOT NULL, ABILITY VARCHAR(256) NOT NULL, LOCATION VARCHAR(100) NOT NULL, OWNED BOOLEAN NOT NULL, DESCRIPTION VARCHAR(256) NOT NULL, EXPLANATION VARCHAR(512))", function(err, rows, fields) {
+		connection.query("CREATE TABLE IF NOT EXISTS CARDS (NAME VARCHAR(512) PRIMARY KEY NOT NULL, FACTION VARCHAR(100) NOT NULL, STRENGTH INT NOT NULL, ROWVAL VARCHAR(60) NOT NULL, ABILITY VARCHAR(256) NOT NULL, LOCATION VARCHAR(100) NOT NULL, OWNED BOOLEAN NOT NULL, HERO BOOLEAN NOT NULL, DESCRIPTION VARCHAR(256) NOT NULL, EXPLANATION VARCHAR(512))", function(err, rows, fields) {
 			if (!err) {
 				let cardList = JSON.parse(message);
 				//Iterate through the lsit of cards, and add each one to the database
 				cardList.forEach(function(card) {
-					connection.query("INSERT INTO CARDS (NAME, FACTION, STRENGTH, ROWVAL, ABILITY, LOCATION, OWNED, DESCRIPTION, EXPLANATION) VALUES ('" + card.name + "', '" + card.faction + "'," + card.strength + ", '" + card.row + "', '" + card.ability + "','" + card.location + "', '" + card.owned + "', '" + card.primaryInfo + "','" + card.secondaryInfo + "')", function(err, results) {
+					connection.query("INSERT INTO CARDS (NAME, FACTION, STRENGTH, ROWVAL, ABILITY, LOCATION, OWNED, HERO, DESCRIPTION, EXPLANATION) VALUES ('" + card.name + "', '" + card.faction + "'," + card.strength + ", '" + card.row + "', '" + card.ability + "','" + card.location + "', '" + card.owned + "', '" + card.hero + "','" + card.primaryInfo + "','" + card.secondaryInfo + "')", function(err, results) {
 						
 					});
 				});
@@ -190,9 +190,36 @@ app.post('/searchName', function(req, res) {
 
 //Function for the advanced search parameters
 app.post('/advancedSearch', function(req, res) {
+	//Get info for optional queries
 	let faction = req.body.f;
 	let strength = req.body.s;
 	let row = req.body.r;
 	let owned = req.body.o;
-	console.log(faction + strength + row + owned);
+	let hero = req.body.h;
+	let ability = req.body.a;
+	//Set default values to null
+	if (faction == "all") {
+		faction = null;
+	}
+	if (strength == "all") {
+		strength = null;
+	}
+	if (row == "all") {
+		row = null;
+	}
+	if (owned == 'all') {
+		owned = null;
+	}
+	if (hero == 'all') {
+		hero = null;
+	}
+	if (ability == 'all') {
+		ability = null;
+	}
+	//Execute query where you have multiple optional parameters
+	connection.query("SELECT * FROM CARDS WHERE (? IS NULL OR FACTION = ?) AND (? IS NULL OR STRENGTH = ?) AND (? IS NULL OR ROWVAL = ?) AND (? IS NULL OR OWNED = ?) AND (? IS NULL OR HERO = ?) AND (? IS NULL OR ABILITY = ?)", [faction, faction, strength, strength, row, row, owned, owned, hero, hero, ability, ability], function(err, rows, fields) {
+		if (!err) {
+			res.send(rows);
+		}
+	})
 });

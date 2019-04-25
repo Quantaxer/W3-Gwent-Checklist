@@ -1,7 +1,7 @@
 import sys, json
 #card object
 class Card(object):
-	def __init__(self, faction, name, strength, row, ability, location, owned, primaryInfo, secondaryInfo):
+	def __init__(self, faction, name, strength, row, ability, location, owned, hero, primaryInfo, secondaryInfo):
 		self.faction = faction
 		self.name = name
 		self.strength = strength
@@ -9,6 +9,7 @@ class Card(object):
 		self.ability = ability
 		self.location = location
 		self.owned = owned
+		self.hero = hero
 		self.primaryInfo = primaryInfo
 		self.secondaryInfo = secondaryInfo
 
@@ -21,7 +22,7 @@ if __name__ == "__main__":
 	for line in f:
 		info = line.split(',')
 		#Get all the info from the line and add it to the lsit of objects
-		newCard = Card(info[0], info[1], info[2], info[3], info[4], info[5], info[6], info[7], info[8])
+		newCard = Card(info[0], info[1], info[2], info[3], info[4], info[5], info[6], info[7], info[8], info[9])
 		listOfCards.append(newCard)
 
 	#stringify the list of objects and return
