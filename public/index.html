@@ -50,6 +50,48 @@
 			<input type="text" placeholder="Search.." name="nameToSearch" id = "nameToSearch" required>
 			<input type="submit" id = "searchFor" name= "searchFor">
 		</form>
+		<form action = '/advancedSearch' method = 'post' id = 'optionalSearch'>
+			<select id = 'factionList'>
+				<option value = 'all'>All</option>
+				<option value = 'Monsters'>Monsters</option>
+				<option value = 'Neutral'>Neutral</option>
+				<option value = 'Nilfgaard'>Nilfgaard</option>
+				<option value = 'Northern Realms'>Northern Realms</option>
+				<option value = 'Scoia&#39Tael'>Scoia'tael</option>
+				<option value = 'Skellige'>Skellige</option>
+			</select>
+			<select id = 'strengthList'>
+				<option value = "all">All</option>
+				<option value = "0">0</option>
+				<option value = "1">1</option>
+				<option value = "2">2</option>
+				<option value = "3">3</option>
+				<option value = "4">4</option>
+				<option value = "5">5</option>
+				<option value = "6">6</option>
+				<option value = "7">7</option>
+				<option value = "8">8</option>
+				<option value = "9">9</option>
+				<option value = "10">10</option>
+				<option value = "12">12</option>
+				<option value = "15">15</option>
+			</select>
+			<select id = 'rowList'>
+				<option value = "all">All</option>
+				<option value = "Melee">Melee</option>
+				<option value = "Range">Range</option>
+				<option value = "Siege">Siege</option>
+				<option value = "Leader">Leader</option>
+				<option value = "Special">Special</option>
+				<option value = "Weather">Weather</option>
+				<option value = "Melee / Range">Melee / Range</option>
+			</select>
+			<select id = 'ownedList'>
+				<option value = "1">Owned</option>
+				<option value = "0">Unowned</option>
+			</select>
+			<input type = "submit" value = "Search" id = "searchButton">
+		</form>
 		<div id = 'totalChecked'>
 			Total cards owned: 0
 		</div>

@@ -196,11 +196,24 @@ $(document).ready(function() {
         updateMainTable("Skellige");
     });
 
+    $("#searchButton").click(function(event) {
+        event.preventDefault();
+        $.ajax({
+            type: 'post',
+            url: '/advancedSearch',
+            dataType: 'html',
+            data: {f: $("#factionList").val(), s: $("#strengthList").val(), r: $("#rowList").val(), o:$("#ownedList").val()},
+            success: function (data) {
+
+            }
+        });
+    })
+
     //Function for the search bar
     $("#searchFor").click(function(event) {
         //Prevent the post from refreshing
         event.preventDefault();
-         $.ajax({
+        $.ajax({
             type: 'post',
             url: '/searchName',
             dataType: 'html',

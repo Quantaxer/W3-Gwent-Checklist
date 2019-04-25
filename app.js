@@ -187,3 +187,12 @@ app.post('/searchName', function(req, res) {
 		}
 	});
 });
+
+//Function for the advanced search parameters
+app.post('/advancedSearch', function(req, res) {
+	let faction = req.body.f;
+	let strength = req.body.s;
+	let row = req.body.r;
+	let owned = req.body.o;
+	console.log(faction + strength + row + owned);
+});
