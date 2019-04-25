@@ -10,6 +10,68 @@ body {
     min-height: 100%;
     line-height: 1.75;
     background-color: #FFFFFF;
+    background-image: url("background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 {
+	width: 75%;
+	font-weight: bold;
+	opacity: 1;
+	word-wrap: break-word;
+	font-size: 48px;
+	color: white;
+	font-family: Verdana;
+	text-align: center;
+	margin: auto;
+}
+
+h3 {
+	font-family: Verdana;
+	font-weight: bold;
+	color:white;
+	font-size: 25;
+	text-align: center;
+	margin: auto;
+}
+
+#dbLoginButton {
+	background-color: black;
+	font-family: Verdana;
+	color:white;
+	font-size: 20px;
+	width:150px;
+}
+
+#loginScreen {
+	position:fixed;
+	background-color: black;
+	opacity: 0.80;
+	border:1px;
+	left: 10%;
+	top: 2%;
+	height:96%;
+	width: 80%;
+}
+
+#dbLogin {
+	display: inline-block;
+	font-family: Verdana;
+	font-weight: bold;
+	opacity: 1;
+	width: 40%;
+	font-size: 16px;
+}
+
+.loginForm {
+	width: 100%;
+}
+
+#loginInput {
+	text-align: center;
+	color: white;
 }
 
 table {

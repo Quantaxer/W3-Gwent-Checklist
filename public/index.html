@@ -18,13 +18,22 @@
 </head>
 <body>
 	<div id = 'loginScreen'>
-	    <form action = '/fillTables' method='post' id = "dbLogin">
-	        Username:<br> <input type="text" name="username" id="username" required>
-	        <br>Password:<br> <input type="password" name="pw" id = "pw">
-	        <br>Database Name:<br> <input type= "text" name="dbName" id = "dbName" required>
-	        <br>Host:<br> <input type= "text" name="host" id = "host" required>
-	        <br><br><input type = "submit" value = "Login" id = "dbLoginButton">
-	    </form>
+		<b><h1>Welcome to the Gwent Checklist and Deckbuilder! </h1></b>
+		<br><br><br>
+		<b><h3>Please enter your database credentials</h3> <br></b>
+		<div id = 'loginInput'>
+		    <form action = '/fillTables' method='post' id = "dbLogin">
+		        Username:<br> <input type="text" name="username" id="username" class= "loginForm" required>
+		        <br>Password:<br> <input type="password" name="pw" id = "pw" class= "loginForm">
+		        <br>Database Name:<br> <input type= "text" name="dbName" id = "dbName" class= "loginForm" required>
+		        <br>Host:<br> <input type= "text" name="host" id = "host" class= "loginForm" required>
+		        <br><br><input type = "submit" value = "Login" id = "dbLoginButton">
+		    </form>
+		    <br>
+		    <br>
+		    <br>
+		    <img src = "cards.jpg">
+		</div>
 	</div>
 	<div id = 'checklistScreen' style = "display:none">
 		<div id = 'selectedCardInfo'>
