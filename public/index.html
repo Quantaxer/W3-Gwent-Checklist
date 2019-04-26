@@ -52,13 +52,15 @@
 				</div>
 			</div>
 			<div id = 'factionButtons'>
-				<button id = 'all'>All</button>
-				<button id = 'monsters'>Monsters</button>
-				<button id = 'neutral'>Neutral</button>
-				<button id = 'nilfgaard'>Nilfgaard</button>
-				<button id = 'northernRealms'>Northern Realms</button>
-				<button id = 'scoia'>Scoia'tael</button>
-				<button id = 'skellige'>Skellige</button>
+				<div class = 'but-Contain'><button id = 'all' class='chooseBtn'>All</button></div>
+				<div class = 'but-Contain'><button id = 'monsters' class='chooseBtn'>Monsters</button></div>
+				<div class = 'but-Contain'><button id = 'neutral' class='chooseBtn'>Neutral</button></div>
+				<button id = 'nilfgaard' class='chooseBtn'>Nilfgaard</button>
+			</div>
+			<div id = 'factionButtons2'>
+				<div class = 'but-Contain'><button id = 'northernRealms' class='chooseBtn'>Northern</button></div>
+				<div class = 'but-Contain'><button id = 'scoia' class='chooseBtn'>Scoia'tael</button></div>
+				<button id = 'skellige' class='chooseBtn'>Skellige</button>
 			</div>
 			<form action = '/searchName' method='post' id = "searchName">
 				<input type="text" placeholder="Search.." name="nameToSearch" id = "nameToSearch" required>
