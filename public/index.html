@@ -139,46 +139,45 @@
 			</div>
 		</div>
 		<div id = 'squareBG1'>
-			<div id = 'selectedCardInfo'>
-				<img id = 'cardPic' alt="No card selected" width="100" height="200">
-				<div id = 'selectedText' style = "display:none">
-					<span id = 'cardName'>Nothing</span>
-					<span id = 'cardFaction'>Nothing </span>
-					<span id = 'cardStrength'>Nothing</span>
-					<span id = 'cardAbility'>Nothing</span>
-					<span id = 'cardRow'>Nothing</span>
+				<div id = "allButtons">
+					<div id = 'factionButtons'>
+						<div class = 'but-Contain'><button id = 'all' class='chooseBtn'>All</button></div>
+						<div class = 'but-Contain'><button id = 'monsters' class='chooseBtn'>Monsters</button></div>
+						<div class = 'but-Contain'><button id = 'neutral' class='chooseBtn'>Neutral</button></div>
+						<button id = 'nilfgaard' class='chooseBtn'>Nilfgaard</button>
+					</div>
+					<div id = 'factionButtons2'>
+						<div class = 'but-Contain'><button id = 'northernRealms' class='chooseBtn'>Northern</button></div>
+						<div class = 'but-Contain'><button id = 'scoia' class='chooseBtn'>Scoia'tael</button></div>
+						<button id = 'skellige' class='chooseBtn'>Skellige</button>
+					</div>
+					<div id = 'totalChecked'>
+						Total cards owned: 0
+					</div>
 				</div>
-			</div>
-			<div id = 'factionButtons'>
-				<div class = 'but-Contain'><button id = 'all' class='chooseBtn'>All</button></div>
-				<div class = 'but-Contain'><button id = 'monsters' class='chooseBtn'>Monsters</button></div>
-				<div class = 'but-Contain'><button id = 'neutral' class='chooseBtn'>Neutral</button></div>
-				<button id = 'nilfgaard' class='chooseBtn'>Nilfgaard</button>
-			</div>
-			<div id = 'factionButtons2'>
-				<div class = 'but-Contain'><button id = 'northernRealms' class='chooseBtn'>Northern</button></div>
-				<div class = 'but-Contain'><button id = 'scoia' class='chooseBtn'>Scoia'tael</button></div>
-				<button id = 'skellige' class='chooseBtn'>Skellige</button>
-			</div>
-			<br>
-			<div id = 'totalChecked'>
-				Total cards owned: 0
-			</div>
 			<div class = 'tt'>
-				<table id = 'tableOfCards'>
-					<tr>
-						<th>Owned</th>
-						<th>Card Name</th>
-						<th>Faction</th>
-						<th>Strength</th>
-						<th>Ability</th>
-						<th>Hero</th>
-						<th>Row</th>
-						<th>Location of Card</th>
-						<th>How to obtain</th>
-						<th>Explanation</th>
-					</tr>
-				</table>
+				<div id = 'selectedCardInfo'>
+					<img id = 'cardPic' width = "270" height="320">
+					<div id = 'selectedText'>
+						<span id = 'cardName'>No card selected</span>
+					</div>
+				</div>
+				<div id = "tableDiv">
+					<table id = 'tableOfCards'>
+						<tr>
+							<th>Owned</th>
+							<th>Card Name</th>
+							<th>Faction</th>
+							<th>Strength</th>
+							<th>Ability</th>
+							<th>Hero</th>
+							<th>Row</th>
+							<th>Location of Card</th>
+							<th>How to obtain</th>
+							<th>Explanation</th>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

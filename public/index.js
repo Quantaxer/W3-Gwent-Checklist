@@ -18,6 +18,14 @@ function fillUpTable(list) {
 
             let cell = row.insertCell(0);
             let value = document.createElement("INPUT");
+            if (card.OWNED == 1) {
+                row.style.color = "gray";
+                row.style.fontStyle = "italic";
+            }
+            else {
+                row.style.color = "black";
+                row.style.fontStyle = "normal";
+            }
             value.type = "checkbox";
             value.checked = card.OWNED;
             value.className = "owned";
@@ -154,20 +162,15 @@ $(document).ready(function() {
         let strength = document.getElementById('tableOfCards').rows[this.parentElement.rowIndex].cells[3].firstChild.data;
         let ability = document.getElementById('tableOfCards').rows[this.parentElement.rowIndex].cells[4].firstChild.data;
         let row = document.getElementById('tableOfCards').rows[this.parentElement.rowIndex].cells[5].firstChild.data;
-
+        let tableRow = this.parentElement;
         //Create the url for the image and set it
         let url = faction + '/' + name + '.png';
         $("#cardPic").attr('src', url);
         //Set all other information for the selected card
-        document.getElementById('cardName').innerHTML = "Name: " + name;
-        document.getElementById('cardFaction').innerHTML = "Faction: " + faction;
-        document.getElementById('cardStrength').innerHTML = "Strength: " + strength;
-        document.getElementById('cardAbility').innerHTML = "Ability: " + ability;
-        document.getElementById('cardRow').innerHTML = "Row: " + row;
+        document.getElementById('cardName').innerHTML = name;
         $("#selectedText").show();
-
         //Check if the person clicked on the checkbox
-        if ((this.firstChild.checked == true)|| (this.firstChild.checked == false)) {
+        if ((check == true)|| (check == false)) {
             //Get the name of the card to update the value
             $.ajax({
                 type: 'get',
@@ -175,6 +178,14 @@ $(document).ready(function() {
                 data:({ownVal: check, nameVal: name}),
                 success: function(data) {
                     updateTotalChecked();
+                    if (check == true) {
+                        tableRow.style.color = "gray";
+                        tableRow.style.fontStyle = "italic";
+                    }
+                    else {
+                        tableRow.style.color = "black";
+                        tableRow.style.fontStyle = "normal";
+                    }
                 }
             });
         }

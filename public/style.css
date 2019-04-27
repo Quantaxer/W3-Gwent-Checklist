@@ -60,7 +60,6 @@ h3 {
 #squareBG1 {
 	position:fixed;
 	background-color: black;
-	opacity: 0.80;
 	border:1px;
 	left: 10%;
 	top: 9%;
@@ -106,17 +105,11 @@ h3 {
 	color: #B8860B;
 }
 
-.tt {
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
-
-}
-
 #totalChecked {
 	font-family: Verdana;
 	font-weight: bold;
 	text-align: center;
+	font-size: 20px;
 	color:white;
 }
 
@@ -128,6 +121,7 @@ h3 {
 #factionButtons {
 	text-align: center;
 	cursor: pointer;
+	padding-top: 10px;
 	padding-bottom: 10px;
 }
 
@@ -145,6 +139,10 @@ h3 {
 	color: #B8860B;
 }
 
+#searchBtn:active {
+	transition: 0.3s;
+}
+
 #searchMenu {
 	position:fixed;
 	padding-right: 100px;
@@ -159,7 +157,7 @@ h3 {
 
 #factionButtons2 {
 	text-align: center;
-	padding-bottom: 20px; 
+	padding-bottom: 40px; 
 	padding-top: 5px;
 }
 
@@ -174,6 +172,11 @@ h3 {
     object-fit: contain;
 	color:white;
 	width: 230px;
+}
+
+#allButtons {
+	float:left;
+	width:75%;
 }
 
 #all {
@@ -226,6 +229,37 @@ h3 {
 	background-size: auto;
 }
 
+#selectedCardInfo {
+	position:absolute;
+	top:28%;
+	overflow: hidden;
+	margin-left: 79%;
+}
+
+#cardPic {
+	border:1px solid white;
+	height:433px;
+	width:288px;
+}
+
+#cardName {
+	color:white;
+	font-weight: bold;
+	width:100%;
+	font-family: Verdana;
+	font-size: 20px;
+}
+
+.tt {
+	margin:auto;
+	width:100%;
+}
+
+#tableDiv {
+	float:left;
+	width:80%;
+}
+
 table {
     table-layout: fixed;
     font-family: Verdana;
@@ -245,6 +279,7 @@ table td {
 }
 
 table tr {
+	color: black;
 	background-color: white;
 }
 
@@ -254,8 +289,10 @@ table tr:hover {
 
 table tbody { 
 	margin-left: 5%;
+	height:auto;
+	max-height: 500px;
 	width: 90%; 
-	height:500px; 
+	height:550px; 
 	overflow:scroll; 
 	border:1px black;
 	display:block; 
