@@ -97,6 +97,7 @@ function updateTotalChecked() {
 }
 
 let selectedRow;
+let isSearch = -1;
 
 //Main event listeners go here
 $(document).ready(function() {
@@ -219,7 +220,23 @@ $(document).ready(function() {
                 fillUpTable(result);
             }
         });
-    })
+    });
+
+    $("#searchBtn").click(function(event) {
+        if (isSearch < 0) {
+            document.getElementById("squareBG1").style.left = "20%";
+            document.getElementById("searchMenu").style.width = "19%";
+            $("#searchMenu").show();
+        }
+        else {
+            document.getElementById("squareBG1").style.left = "10%";
+            document.getElementById("searchMenu").style.width = "0%";
+            $("#searchMenu").hide();
+        }
+        isSearch = isSearch * -1;
+
+
+    });
 
     //Function for the search bar
     $("#searchFor").click(function(event) {

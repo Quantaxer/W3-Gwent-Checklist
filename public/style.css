@@ -41,6 +41,7 @@ h3 {
 	background-color: black;
 	font-family: Verdana;
 	color:white;
+	cursor: pointer;
 	font-size: 20px;
 	width:150px;
 }
@@ -56,7 +57,7 @@ h3 {
 	width: 80%;
 }
 
-.squareBG1 {
+#squareBG1 {
 	position:fixed;
 	background-color: black;
 	opacity: 0.80;
@@ -126,7 +127,34 @@ h3 {
 
 #factionButtons {
 	text-align: center;
+	cursor: pointer;
 	padding-bottom: 10px;
+}
+
+#searchBtn {
+	color: white;
+	background-color: black;
+	padding: 5px 5px;
+	font-size: 18px;
+	font-weight: bold;
+	border: 1px #B8860B;
+	font-family: Verdana;
+}
+
+#searchBtn:hover {
+	color: #B8860B;
+}
+
+#searchMenu {
+	position:fixed;
+	padding-right: 100px;
+	background-color: black;
+	opacity: 0.80;
+	border:1px;
+	top: 15%;
+	height:77%;
+	width: 0%;
+	transition: 0.3s;
 }
 
 #factionButtons2 {

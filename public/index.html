@@ -40,7 +40,105 @@
 			<button>Checklist</button>
 			<button>Deckbuilder</button>
 		</div>
-		<div class = 'squareBG1'>
+		<br>
+		<button type="button" id = "searchBtn">☰ Search...</button>
+		<div id = 'searchMenu' class = "collapse">
+			<div id = 'primarySearch'>
+				<form action = '/searchName' method='post' id = "searchName">
+					<input type="text" placeholder="Search.." name="nameToSearch" id = "nameToSearch" required>
+					<input type="submit" id = "searchFor" name= "searchFor">
+				</form>
+			</div>
+			<div id = 'secondarySearch'>
+				<form action = '/advancedSearch' method = 'post' id = 'optionalSearch'>
+					<select id = 'factionList'>
+						<option value = 'all'>All</option>
+						<option value = 'Monsters'>Monsters</option>
+						<option value = 'Neutral'>Neutral</option>
+						<option value = 'Nilfgaard'>Nilfgaard</option>
+						<option value = 'Northern Realms'>Northern Realms</option>
+						<option value = 'Scoia&#39Tael'>Scoia'tael</option>
+						<option value = 'Skellige'>Skellige</option>
+					</select>
+					<select id = 'strengthList'>
+						<option value = "all">All</option>
+						<option value = "0">0</option>
+						<option value = "1">1</option>
+						<option value = "2">2</option>
+						<option value = "3">3</option>
+						<option value = "4">4</option>
+						<option value = "5">5</option>
+						<option value = "6">6</option>
+						<option value = "7">7</option>
+						<option value = "8">8</option>
+						<option value = "9">9</option>
+						<option value = "10">10</option>
+						<option value = "12">12</option>
+						<option value = "15">15</option>
+					</select>
+					<select id = 'rowList'>
+						<option value = "all">All</option>
+						<option value = "Leader">Leader</option>
+						<option value = "Melee">Melee</option>
+						<option value = "Melee / Range">Melee / Range</option>
+						<option value = "Range">Range</option>
+						<option value = "Siege">Siege</option>
+						<option value = "Special">Special</option>
+						<option value = "Weather">Weather</option>
+					</select>
+					<select id = 'abilityList'>
+						<option value = "all">All</option>
+						<option value = "All cards from discard piles back to decks">All cards from discard piles back to decks</option>
+						<option value = "Agile">Leader</option>
+						<option value = "Berserker">Berserker</option>
+						<option value = "Berserker transformation">Berserker transformation</option>
+						<option value = "Bond">Bond</option>
+						<option value = "Cancel Leader">Cancel Leader</option>
+						<option value = "Destroy Strongest Melee if Melee+10">Destroy Strongest Melee if Melee+10</option>
+						<option value = "Destroys the strongest Non-Hero Card">Destroys the strongest Non-Hero Card</option>
+						<option value = "Discard 2 draw 1">Discard 2 draw 1</option>
+						<option value = "Doubles strength of all spies">Doubles strength of all spies</option>
+						<option value = "Double the strength of Row">Double the strength of Row</option>
+						<option value = "Double the strength of siege">Double the strength of siege</option>
+						<option value = "Draw card from opposite Discard">Draw card from opposite Discard</option>
+						<option value = "Draw extra card">Draw extra card</option>
+						<option value = "Horn Close Combat">Horn Close Combat</option>
+						<option value = "Horn on Ranged">Horn on Ranged</option>
+						<option value = "Look at 3 random Cards">Look at 3 random Cards</option>
+						<option value = "Medic">Medic</option>
+						<option value = "Morale">Morale</option>
+						<option value = "Move agile units to optimal row">Move agile units to optimal row</option>
+						<option value = "Muster">Muster</option>
+						<option value = "None">None</option>
+						<option value = "Pick any weather">Pick any weather</option>
+						<option value = "Removes all weather">Removes all weather</option>
+						<option value = "Restore units">Restore units</option>
+						<option value = "Sets all Non-Hero melee to 1">Sets all Non-Hero melee to 1</option>
+						<option value = "Sets all Non-Hero range to 1">Sets all Non-Hero range to 1</option>
+						<option value = "Sets all non-hero range and siege to 1">Sets all non-hero range and siege to 1</option>
+						<option value = "Sets all Non-Hero siege to 1">Sets all Non-Hero siege to 1</option>
+						<option value = "Scorch melee if + 10">Scorch melee if + 10</option>
+						<option value = "Scorch Siege if +10">Scorch Siege if +10</option>
+						<option value = "Spy">Spy</option>
+						<option value = "Swap with a non-Hero card">Swap with a non-Hero card</option>
+						<option value = "Units lose half strength in weather">Units lose half strength in weather</option>
+						<option value = "When removed from battle summon an 8 power unit">When removed from battle summon an 8 power unit</option>
+					</select>
+					<select id = 'heroList'>
+						<option value = "all">all</option>
+						<option value = "0">Not Hero</option>
+						<option value = "1">Hero</option>
+					</select>
+					<select id = 'ownedList'>
+						<option value = "all">All</option>
+						<option value = "1">Owned</option>
+						<option value = "0">Unowned</option>
+					</select>
+					<input type = "submit" value = "Search" id = "searchButton">
+				</form>
+			</div>
+		</div>
+		<div id = 'squareBG1'>
 			<div id = 'selectedCardInfo'>
 				<img id = 'cardPic' alt="No card selected" width="100" height="200">
 				<div id = 'selectedText' style = "display:none">
@@ -62,96 +160,7 @@
 				<div class = 'but-Contain'><button id = 'scoia' class='chooseBtn'>Scoia'tael</button></div>
 				<button id = 'skellige' class='chooseBtn'>Skellige</button>
 			</div>
-			<form action = '/searchName' method='post' id = "searchName">
-				<input type="text" placeholder="Search.." name="nameToSearch" id = "nameToSearch" required>
-				<input type="submit" id = "searchFor" name= "searchFor">
-			</form>
-			<form action = '/advancedSearch' method = 'post' id = 'optionalSearch'>
-				<select id = 'factionList'>
-					<option value = 'all'>All</option>
-					<option value = 'Monsters'>Monsters</option>
-					<option value = 'Neutral'>Neutral</option>
-					<option value = 'Nilfgaard'>Nilfgaard</option>
-					<option value = 'Northern Realms'>Northern Realms</option>
-					<option value = 'Scoia&#39Tael'>Scoia'tael</option>
-					<option value = 'Skellige'>Skellige</option>
-				</select>
-				<select id = 'strengthList'>
-					<option value = "all">All</option>
-					<option value = "0">0</option>
-					<option value = "1">1</option>
-					<option value = "2">2</option>
-					<option value = "3">3</option>
-					<option value = "4">4</option>
-					<option value = "5">5</option>
-					<option value = "6">6</option>
-					<option value = "7">7</option>
-					<option value = "8">8</option>
-					<option value = "9">9</option>
-					<option value = "10">10</option>
-					<option value = "12">12</option>
-					<option value = "15">15</option>
-				</select>
-				<select id = 'rowList'>
-					<option value = "all">All</option>
-					<option value = "Leader">Leader</option>
-					<option value = "Melee">Melee</option>
-					<option value = "Melee / Range">Melee / Range</option>
-					<option value = "Range">Range</option>
-					<option value = "Siege">Siege</option>
-					<option value = "Special">Special</option>
-					<option value = "Weather">Weather</option>
-				</select>
-				<select id = 'abilityList'>
-					<option value = "all">All</option>
-					<option value = "All cards from discard piles back to decks">All cards from discard piles back to decks</option>
-					<option value = "Agile">Leader</option>
-					<option value = "Berserker">Berserker</option>
-					<option value = "Berserker transformation">Berserker transformation</option>
-					<option value = "Bond">Bond</option>
-					<option value = "Cancel Leader">Cancel Leader</option>
-					<option value = "Destroy Strongest Melee if Melee+10">Destroy Strongest Melee if Melee+10</option>
-					<option value = "Destroys the strongest Non-Hero Card">Destroys the strongest Non-Hero Card</option>
-					<option value = "Discard 2 draw 1">Discard 2 draw 1</option>
-					<option value = "Doubles strength of all spies">Doubles strength of all spies</option>
-					<option value = "Double the strength of Row">Double the strength of Row</option>
-					<option value = "Double the strength of siege">Double the strength of siege</option>
-					<option value = "Draw card from opposite Discard">Draw card from opposite Discard</option>
-					<option value = "Draw extra card">Draw extra card</option>
-					<option value = "Horn Close Combat">Horn Close Combat</option>
-					<option value = "Horn on Ranged">Horn on Ranged</option>
-					<option value = "Look at 3 random Cards">Look at 3 random Cards</option>
-					<option value = "Medic">Medic</option>
-					<option value = "Morale">Morale</option>
-					<option value = "Move agile units to optimal row">Move agile units to optimal row</option>
-					<option value = "Muster">Muster</option>
-					<option value = "None">None</option>
-					<option value = "Pick any weather">Pick any weather</option>
-					<option value = "Removes all weather">Removes all weather</option>
-					<option value = "Restore units">Restore units</option>
-					<option value = "Sets all Non-Hero melee to 1">Sets all Non-Hero melee to 1</option>
-					<option value = "Sets all Non-Hero range to 1">Sets all Non-Hero range to 1</option>
-					<option value = "Sets all non-hero range and siege to 1">Sets all non-hero range and siege to 1</option>
-					<option value = "Sets all Non-Hero siege to 1">Sets all Non-Hero siege to 1</option>
-					<option value = "Scorch melee if + 10">Scorch melee if + 10</option>
-					<option value = "Scorch Siege if +10">Scorch Siege if +10</option>
-					<option value = "Spy">Spy</option>
-					<option value = "Swap with a non-Hero card">Swap with a non-Hero card</option>
-					<option value = "Units lose half strength in weather">Units lose half strength in weather</option>
-					<option value = "When removed from battle summon an 8 power unit">When removed from battle summon an 8 power unit</option>
-				</select>
-				<select id = 'heroList'>
-					<option value = "all">all</option>
-					<option value = "0">Not Hero</option>
-					<option value = "1">Hero</option>
-				</select>
-				<select id = 'ownedList'>
-					<option value = "all">All</option>
-					<option value = "1">Owned</option>
-					<option value = "0">Unowned</option>
-				</select>
-				<input type = "submit" value = "Search" id = "searchButton">
-			</form>
+			<br>
 			<div id = 'totalChecked'>
 				Total cards owned: 0
 			</div>
