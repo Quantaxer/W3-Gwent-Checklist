@@ -44,14 +44,20 @@
 		<button type="button" id = "searchBtn">☰ Search...</button>
 		<div id = 'searchMenu' class = "collapse">
 			<div id = 'primarySearch'>
+				<div class = "pSearchText">Basic Search</div>
 				<form action = '/searchName' method='post' id = "searchName">
-					<input type="text" placeholder="Search.." name="nameToSearch" id = "nameToSearch" required>
-					<input type="submit" id = "searchFor" name= "searchFor">
+					<input type="text" placeholder="Search for name..." name="nameToSearch" id = "nameToSearch" required>
+					<br>
+					<br>
+					<input type="submit" id = "searchFor" value = "Search" class = "searchSubmit" name= "searchFor">
 				</form>
 			</div>
+			<br>
 			<div id = 'secondarySearch'>
 				<form action = '/advancedSearch' method = 'post' id = 'optionalSearch'>
-					<select id = 'factionList'>
+					<div class = "pSearchText">Advanced Search</div>
+					<div class = "sSearch">Faction</div>
+					<select id = 'factionList' class = "selectStyle">
 						<option value = 'all'>All</option>
 						<option value = 'Monsters'>Monsters</option>
 						<option value = 'Neutral'>Neutral</option>
@@ -60,7 +66,8 @@
 						<option value = 'Scoia&#39Tael'>Scoia'tael</option>
 						<option value = 'Skellige'>Skellige</option>
 					</select>
-					<select id = 'strengthList'>
+					<div class = "sSearch">Strength</div>
+					<select id = 'strengthList' class = "selectStyle">
 						<option value = "all">All</option>
 						<option value = "0">0</option>
 						<option value = "1">1</option>
@@ -76,7 +83,8 @@
 						<option value = "12">12</option>
 						<option value = "15">15</option>
 					</select>
-					<select id = 'rowList'>
+					<div class = "sSearch">Row</div>
+					<select id = 'rowList' class = "selectStyle">
 						<option value = "all">All</option>
 						<option value = "Leader">Leader</option>
 						<option value = "Melee">Melee</option>
@@ -86,7 +94,8 @@
 						<option value = "Special">Special</option>
 						<option value = "Weather">Weather</option>
 					</select>
-					<select id = 'abilityList'>
+					<div class = "sSearch">Ability</div>
+					<select id = 'abilityList' class = "selectStyle">
 						<option value = "all">All</option>
 						<option value = "All cards from discard piles back to decks">All cards from discard piles back to decks</option>
 						<option value = "Agile">Leader</option>
@@ -124,17 +133,21 @@
 						<option value = "Units lose half strength in weather">Units lose half strength in weather</option>
 						<option value = "When removed from battle summon an 8 power unit">When removed from battle summon an 8 power unit</option>
 					</select>
-					<select id = 'heroList'>
-						<option value = "all">all</option>
+					<div class = "sSearch">Hero</div>
+					<select id = 'heroList' class = "selectStyle">
+						<option value = "all">All</option>
 						<option value = "0">Not Hero</option>
 						<option value = "1">Hero</option>
 					</select>
-					<select id = 'ownedList'>
+					<div class = "sSearch">Owned</div>
+					<select id = 'ownedList' class = "selectStyle">
 						<option value = "all">All</option>
 						<option value = "1">Owned</option>
 						<option value = "0">Unowned</option>
 					</select>
-					<input type = "submit" value = "Search" id = "searchButton">
+					<br>
+					<br>
+					<input type = "submit" value = "Search" class = "searchSubmit" id = "searchButton">
 				</form>
 			</div>
 		</div>
@@ -157,7 +170,10 @@
 				</div>
 			<div class = 'tt'>
 				<div id = 'selectedCardInfo'>
-					<img id = 'cardPic' width = "270" height="320">
+					<div>
+						<img id = 'cardPic' width = "270" height="320">
+					</div>
+					<br>
 					<div id = 'selectedText'>
 						<span id = 'cardName'>No card selected</span>
 					</div>

@@ -46,6 +46,11 @@ h3 {
 	width:150px;
 }
 
+#dbLoginButton:hover{
+	color: #B8860B;
+	border-color: #B8860B;
+}
+
 .squareBG {
 	position:fixed;
 	background-color: black;
@@ -60,6 +65,7 @@ h3 {
 #squareBG1 {
 	position:fixed;
 	background-color: black;
+	opacity: 0.9;
 	border:1px;
 	left: 10%;
 	top: 9%;
@@ -137,11 +143,47 @@ h3 {
 
 #searchBtn:hover {
 	color: #B8860B;
+	cursor: pointer;
 }
 
 #searchBtn:active {
 	transition: 0.3s;
 }
+
+.sSearch {
+	color: white;
+	font-family: Verdana;
+	font-weight: bold;
+}
+
+.pSearchText {
+	color: white;
+	font-family: Verdana;
+	font-weight: bold;
+	font-size: 22px;
+}
+
+.searchSubmit {
+	color: white;
+	background-color: black;
+	padding: 5px 5px;
+	font-size: 18px;
+	font-weight: bold;
+	font-family: Verdana;
+}
+
+.searchSubmit:hover {
+	color: #B8860B;
+	border-color: #B8860B;
+	cursor:pointer;
+}
+
+.selectStyle {
+	width:150px;
+	font-family: Verdana;
+}
+
+
 
 #searchMenu {
 	position:fixed;
@@ -172,6 +214,10 @@ h3 {
     object-fit: contain;
 	color:white;
 	width: 230px;
+}
+
+.chooseBtn:hover {
+	cursor:pointer;
 }
 
 #allButtons {
@@ -237,9 +283,9 @@ h3 {
 }
 
 #cardPic {
-	border:1px solid white;
 	height:433px;
 	width:288px;
+	margin:-20px;
 }
 
 #cardName {
