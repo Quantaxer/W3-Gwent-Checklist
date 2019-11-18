@@ -170,19 +170,6 @@ app.get('/getTotalChecked', async function(req, res) {
 	}
 });
 
-//Function that runs when the user searches for a certain card by the name
-app.post('/searchName', async function(req, res) {
-	let name = req.body.name;
-	//Query gets the specific card
-	try {
-		let rows = await connection.query(`SELECT * FROM CARDS WHERE (name = '${name}')`);
-		res.send(rows);
-	}
-	catch(e) {
-		console.error(e);
-	}
-});
-
 //Function for the advanced search parameters
 app.post('/advancedSearch', async function(req, res) {
 	//Default values set to null
@@ -198,9 +185,10 @@ app.post('/advancedSearch', async function(req, res) {
 	let owned = req.body.o;
 	let hero = req.body.h;
 	let ability = req.body.a;
+	let name = req.body.n;
 	//Execute query where you have multiple optional parameters
 	try {
-		let rows = await connection.query(`SELECT * FROM CARDS WHERE (? IS NULL OR FACTION = ?) AND (? IS NULL OR STRENGTH = ?)
+		let rows = await connection.query(`SELECT * FROM CARDS WHERE (name like '%${name}%') AND (? IS NULL OR FACTION = ?) AND (? IS NULL OR STRENGTH = ?)
 											AND (? IS NULL OR ROWVAL = ?) AND (? IS NULL OR OWNED = ?) AND (? IS NULL OR HERO = ?) 
 											AND (? IS NULL OR ABILITY = ?)`, 
 											[faction, faction, strength, strength, row, row, owned, owned, hero, hero, ability, ability]);

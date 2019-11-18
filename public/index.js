@@ -201,41 +201,21 @@ $(document).ready(function() {
         }
     });
 
-    $("#all").click(function(event) {
-        updateMainTable("all");
-    });
-
-    $("#monsters").click(function(event) {
-        updateMainTable("Monsters");
-    });
-
-    $("#neutral").click(function(event) {
-        updateMainTable("Neutral");
-    });
-
-    $("#northernRealms").click(function(event) {
-        updateMainTable("Northern Realms");
-    });
-
-    $("#nilfgaard").click(function(event) {
-        updateMainTable("Nilfgaard");
-    });
-
-    $("#scoia").click(function(event) {
-        updateMainTable("Scoia''tael");
-    });
-
-    $("#skellige").click(function(event) {
-        updateMainTable("Skellige");
-    });
-
     $("#searchButton").click(function(event) {
         event.preventDefault();
         $.ajax({
             type: 'post',
             url: '/advancedSearch',
             dataType: 'html',
-            data: {f: $("#FACTION").val(), s: $("#STRENGTH").val(), r: $("#ROWVAL").val(), o:$("#OWNED").val(), h: $("#HERO").val(), a: $("#ABILITY").val()},
+            data: {
+                n: $('#nameToSearch').val(), 
+                f: $("#FACTION").val(), 
+                s: $("#STRENGTH").val(), 
+                r: $("#ROWVAL").val(), 
+                o:$("#OWNED").val(), 
+                h: $("#HERO").val(), 
+                a: $("#ABILITY").val()
+            },
             success: function (data) {
                 result = JSON.parse(data);
                 fillUpTable(result);
@@ -255,26 +235,5 @@ $(document).ready(function() {
             $("#searchMenu").hide();
         }
         isSearch = isSearch * -1;
-
-
-    });
-
-    //Function for the search bar
-    $("#searchFor").click(function(event) {
-        //Prevent the post from refreshing
-        event.preventDefault();
-        $.ajax({
-            type: 'post',
-            url: '/searchName',
-            dataType: 'html',
-            //Send in the form data
-            data: {name: $("#nameToSearch").val()},
-            success: function (data) {
-                //do stuff with results
-                result = JSON.parse(data);
-                fillUpTable(result);
-            }
-        });
-
     });
 });
