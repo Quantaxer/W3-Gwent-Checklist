@@ -6,7 +6,7 @@ const app     = express();
 const path    = require("path");
 const fileUpload = require('express-fileupload');
 const {PythonShell} = require('python-shell');
-const mysql = require('mysql');
+const mysql = require('promise-mysql');
 const bodyParse = require('body-parser');
 app.use(bodyParse.urlencoded({extended: true}));
 app.use(fileUpload());
@@ -16,7 +16,7 @@ const fs = require('fs-extra');
 const JavaScriptObfuscator = require('javascript-obfuscator');
 
 //Pass in port as in `npm run dev 1234`
-const portNum = process.argv[2];
+const portNum = 38008;
 
 //Send HTML at root
 app.get('/',function(req,res){
@@ -56,140 +56,141 @@ app.get('/getCardInfo', function(req, res) {
 });
 
 //Global variables for the user's database connection
-let userN;
-let pass;
-let name;
-let host;
 let connection = null;
 
 //async function which runs when the user presses connect to the database
-app.post('/connectToDB', function(req, res) {
-	let isErr;
-	//Get user input
-	userN = req.body.username;
-	pass = req.body.pw;
-	name = req.body.dbName;
-	host = req.body.host;
+app.post('/connectToDB', async function(req, res) {
 	//Create connection object
-	connection = mysql.createConnection({
-		host: host,
-		user: userN,
-		password: pass,
-		database: name
-	});
+	let connectionOptions = {
+		host: req.body.host,
+		user: req.body.username,
+		password: req.body.pw,
+		database: req.body.dbName
+	};
 	//Connect to the database
-	connection.connect(function(err) {
-		//Check if the credentials are good. If not return
-		if (err) {
-			isErr = "badCreds";
-		}
-		else {
-			isErr = "good";
-		}
-		res.send(isErr);
-	});
+	connection = await mysql.createConnection(connectionOptions);
+	res.send("done");
 });
 
 //Function that runs after the user connected to the database to fill the tables
-app.get('/fillTables', function(req, res) {
+app.get('/fillTables', async function(req, res) {
+	let columnVals = ['FACTION', 'STRENGTH', 'ROWVAL','ABILITY', 'LOCATION', 'OWNED','HERO', 'DESCRIPTION','EXPLANATION'];
 	//Get the JSON of card information
 	let script = new PythonShell('scripts/infoToJSON.py');
-	script.on('message', function(message) {
+	script.on('message', async function(message) {
 		//Create the table of cards, but only if it isn't already there
-		connection.query("CREATE TABLE IF NOT EXISTS CARDS (NAME VARCHAR(512) PRIMARY KEY NOT NULL, FACTION VARCHAR(100) NOT NULL, STRENGTH INT NOT NULL, ROWVAL VARCHAR(60) NOT NULL, ABILITY VARCHAR(256) NOT NULL, LOCATION VARCHAR(100) NOT NULL, OWNED BOOLEAN NOT NULL, HERO BOOLEAN NOT NULL, DESCRIPTION VARCHAR(256) NOT NULL, EXPLANATION VARCHAR(512))", function(err, rows, fields) {
-			if (!err) {
+		try {
+			let createTableQuery = `CREATE TABLE IF NOT EXISTS CARDS (
+				NAME VARCHAR(512) PRIMARY KEY NOT NULL, 
+				FACTION VARCHAR(100) NOT NULL, 
+				STRENGTH INT NOT NULL, 
+				ROWVAL VARCHAR(60) NOT NULL, 
+				ABILITY VARCHAR(256) NOT NULL, 
+				LOCATION VARCHAR(100) NOT NULL, 
+				OWNED BOOLEAN NOT NULL, 
+				HERO BOOLEAN NOT NULL, 
+				DESCRIPTION VARCHAR(256) NOT NULL, 
+				EXPLANATION VARCHAR(512))`;
+
+			let isTableCreated = await connection.query(createTableQuery);
+			if (isTableCreated.affectedRows !== 0) {
 				let cardList = JSON.parse(message);
 				//Iterate through the lsit of cards, and add each one to the database
-				cardList.forEach(function(card) {
-					connection.query("INSERT INTO CARDS (NAME, FACTION, STRENGTH, ROWVAL, ABILITY, LOCATION, OWNED, HERO, DESCRIPTION, EXPLANATION) VALUES ('" + card.name + "', '" + card.faction + "'," + card.strength + ", '" + card.row + "', '" + card.ability + "','" + card.location + "', '" + card.owned + "', '" + card.hero + "','" + card.primaryInfo + "','" + card.secondaryInfo + "')", function(err, results) {
-						
-					});
-				});
-				//Tell the front end it is finished
-				res.send({done: "good"});
+				for (let card of cardList) {
+					let insertToTableQuery = `INSERT INTO CARDS (NAME, FACTION, STRENGTH, ROWVAL, ABILITY, LOCATION, OWNED, HERO, DESCRIPTION, EXPLANATION) 
+												VALUES ('${card.name}','${card.faction}',${card.strength},'${card.row}','${card.ability}','${card.location}
+												','${card.owned}','${card.hero}','${card.primaryInfo}','${card.secondaryInfo}')`;
+
+					await connection.query(insertToTableQuery);
+				};
 			}
-		});
+			let resultsArr = [];
+			for (let columnName of columnVals) {
+				resultsArr.push(await connection.query(`select ${columnName} from cards group by ${columnName}`));
+			}
+			//Tell the front end it is finished
+			res.send({searchInfo: resultsArr});
+		}
+		catch(e) {
+			console.error("Error creating table: " + e);
+		}
 	});
 });
 
 //Query to populate the table upon logging in
-app.get('/populateInitialTable', function(req, res) {
-	connection.query("SELECT * FROM CARDS ORDER BY FACTION, NAME", function(err, rows, fields) {
-		if (err) {
-			console.log("aww heck");
-		}
-		else {
-			res.send(rows);
-		}
-	});
+app.get('/populateInitialTable', async function(req, res) {
+	try {
+		let results = await connection.query(`SELECT * FROM CARDS ORDER BY FACTION, NAME`);
+		res.send(results);
+	}
+	catch(e) {
+		console.error("Error populating table: " + e);
+	}
 });
 
 //Query to update a row in the db if the userclicks a checkbox
-app.get('/updateOwned', function(req, res) {
+app.get('/updateOwned', async function(req, res) {
 	let newOwned = req.query.ownVal;
 	let name = req.query.nameVal;
-	connection.query("UPDATE CARDS SET OWNED = " + newOwned + " WHERE NAME = '" + name + "'", function(err, results) {
-		if (err) {
-			console.log("UPDATE CARDS SET OWNED = " + newOwned + " WHERE NAME = '" + name + "'");
-		}
-		else {
-			res.send("done");
-		}
-	});
+	try {
+		await connection.query(`UPDATE CARDS SET OWNED = ${newOwned} WHERE NAME = '${name}'`);
+	}
+	catch(e) {
+		console.error("Error updating table: " + e);
+	}
 });
 
 //endpoint that is called when a user hits a button to search by faction
-app.get('/sortTable', function(req, res) {
+app.get('/sortTable', async function(req, res) {
 	let faction = req.query.fact;
-	//Check if the user selected the all button
-	if (faction == "all") {
-		connection.query("SELECT * FROM CARDS ORDER BY FACTION, NAME", function(err, rows, fields) {
-			if (err) {
-				res.send({err: "nothing found"});
-			}
-			else {
-				res.send(rows);
-			}
-		});
+	try {
+		//Check if the user selected the all button
+		if (faction == "all") {
+			let rows = await connection.query(`SELECT * FROM CARDS ORDER BY FACTION, NAME`);
+			res.send(rows);
+		}
+		//Otherwise use the selected faction in the query
+		else {
+			let rows = connection.query(`SELECT * FROM CARDS WHERE (FACTION = '${faction}') ORDER BY NAME`);
+			res.send(rows);
+		}
 	}
-	//Otherwise use the selected faction in the query
-	else {
-		connection.query("SELECT * FROM CARDS WHERE (FACTION = '" + faction + "') ORDER BY NAME", function(err, rows, fields) {
-			if (err) {
-				console.log("SELECT * FROM CARDS WHERE (FACTION = '" + faction + "') ORDER BY NAME");
-			}
-			else {
-				res.send(rows);
-			}
-		});
+	catch(e) {
+		console.error(e);
 	}
 });
 
-app.get('/getTotalChecked', function(req, res) {
-	connection.query("SELECT * FROM CARDS WHERE (OWNED = 1)", function(err, rows, fields) {
-		if (!err) {
-			res.send({num: rows.length});
-		}
-	});
+app.get('/getTotalChecked', async function(req, res) {
+	try {
+		let rows = await connection.query(`SELECT * FROM CARDS WHERE (OWNED = 1)`);
+		res.send({num: rows.length});
+	}
+	catch(e) {
+		console.error(e);
+	}
 });
 
 //Function that runs when the user searches for a certain card by the name
-app.post('/searchName', function(req, res) {
-	let val = req.body.name;
+app.post('/searchName', async function(req, res) {
+	let name = req.body.name;
 	//Query gets the specific card
-	connection.query("SELECT * FROM CARDS WHERE (name = '" + val + "')", function(err, rows, fields) {
-		//Return the row if it exists in the database
-		if (err) {
-			res.send({err: "nothing found"});
-		}
-		else {
-			res.send(rows);
-		}
-	});
+	try {
+		let rows = await connection.query(`SELECT * FROM CARDS WHERE (name = '${name}')`);
+		res.send(rows);
+	}
+	catch(e) {
+		console.error(e);
+	}
 });
 
 //Function for the advanced search parameters
-app.post('/advancedSearch', function(req, res) {
+app.post('/advancedSearch', async function(req, res) {
+	//Default values set to null
+	for (let bodyObject of Object.entries(req.body)) {
+		if (bodyObject[1] === "All") {
+			req.body[bodyObject[0]] = null;
+		}
+	}
 	//Get info for optional queries
 	let faction = req.body.f;
 	let strength = req.body.s;
@@ -197,29 +198,16 @@ app.post('/advancedSearch', function(req, res) {
 	let owned = req.body.o;
 	let hero = req.body.h;
 	let ability = req.body.a;
-	//Set default values to null
-	if (faction == "all") {
-		faction = null;
-	}
-	if (strength == "all") {
-		strength = null;
-	}
-	if (row == "all") {
-		row = null;
-	}
-	if (owned == 'all') {
-		owned = null;
-	}
-	if (hero == 'all') {
-		hero = null;
-	}
-	if (ability == 'all') {
-		ability = null;
-	}
 	//Execute query where you have multiple optional parameters
-	connection.query("SELECT * FROM CARDS WHERE (? IS NULL OR FACTION = ?) AND (? IS NULL OR STRENGTH = ?) AND (? IS NULL OR ROWVAL = ?) AND (? IS NULL OR OWNED = ?) AND (? IS NULL OR HERO = ?) AND (? IS NULL OR ABILITY = ?)", [faction, faction, strength, strength, row, row, owned, owned, hero, hero, ability, ability], function(err, rows, fields) {
-		if (!err) {
-			res.send(rows);
-		}
-	})
+	try {
+		let rows = await connection.query(`SELECT * FROM CARDS WHERE (? IS NULL OR FACTION = ?) AND (? IS NULL OR STRENGTH = ?)
+											AND (? IS NULL OR ROWVAL = ?) AND (? IS NULL OR OWNED = ?) AND (? IS NULL OR HERO = ?) 
+											AND (? IS NULL OR ABILITY = ?)`, 
+											[faction, faction, strength, strength, row, row, owned, owned, hero, hero, ability, ability]);
+									
+		res.send(rows);
+	}
+	catch(e) {
+		console.error(e);
+	}
 });

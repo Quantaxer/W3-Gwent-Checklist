@@ -13,7 +13,8 @@ body {
     background-color: #FFFFFF;
     background-image: url("background.jpg");
     background-position: center;
-    background-repeat: no-repeat;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 h1 {

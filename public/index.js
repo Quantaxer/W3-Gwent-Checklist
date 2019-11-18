@@ -1,4 +1,3 @@
-
 //Helper function to fill up the main table
 function fillUpTable(list) {
     let i = 1;
@@ -131,6 +130,17 @@ $(document).ready(function() {
                         url: 'fillTables',
                         dataType: 'json',
                         success: function(data2) {
+                            for (let searchArray of data2.searchInfo) {
+                                let selectName = Object.keys(searchArray[0])[0];
+                                let selectHTML = document.getElementById(selectName);
+                                selectName = '#' + selectName;
+                                if (selectHTML !== null) {
+                                    searchArray.unshift({selectName: "All"});
+                                    for (let searchObject of searchArray) {
+                                        $(selectName).append($('<option>' + Object.values(searchObject)[0] + '</option>'));
+                                    }
+                                }
+                            }
                             //When the db if filled, populate the html table
                             $.ajax({
                                 type: 'get',
@@ -225,7 +235,7 @@ $(document).ready(function() {
             type: 'post',
             url: '/advancedSearch',
             dataType: 'html',
-            data: {f: $("#factionList").val(), s: $("#strengthList").val(), r: $("#rowList").val(), o:$("#ownedList").val(), h: $("#heroList").val(), a: $("#abilityList").val()},
+            data: {f: $("#FACTION").val(), s: $("#STRENGTH").val(), r: $("#ROWVAL").val(), o:$("#OWNED").val(), h: $("#HERO").val(), a: $("#ABILITY").val()},
             success: function (data) {
                 result = JSON.parse(data);
                 fillUpTable(result);
