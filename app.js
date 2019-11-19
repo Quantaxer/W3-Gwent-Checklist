@@ -132,16 +132,6 @@ app.get('/updateOwned', async function(req, res) {
 	}
 });
 
-app.get('/getTotalChecked', async function(req, res) {
-	try {
-		let rows = await connection.query(`SELECT * FROM CARDS WHERE (OWNED = 1)`);
-		res.send({num: rows.length});
-	}
-	catch(e) {
-		console.error(e);
-	}
-});
-
 //Function for the advanced search parameters
 app.post('/advancedSearch', async function(req, res) {
 	//Default values set to null

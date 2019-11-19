@@ -26,17 +26,6 @@ function fillUpTable(list) {
     }
 }
 
-function updateTotalChecked() {
-    $.ajax({
-        type: 'get',
-        url: '/getTotalChecked',
-        dataType: 'json',
-        success: function(data) {
-            document.getElementById('totalChecked').innerHTML = "Total cards owned: " + data.num + "/251";
-        }
-    });
-}
-
 let isSearch = -1;
 
 //Main event listeners go here
@@ -65,7 +54,7 @@ $(document).ready(function() {
                         success: function(data2) {
                             for (let searchArray of data2.searchInfo) {
                                 let selectName = Object.keys(searchArray[0])[0];
-                                let selectHTML = document.getElementById(selectName);
+                                let selectHTML = $('#selectName');
                                 selectName = '#' + selectName;
                                 if (selectHTML !== null) {
                                     searchArray.unshift({selectName: "All"});
@@ -76,7 +65,7 @@ $(document).ready(function() {
                             }
                             //Populate the main table
                             fillUpTable(data2.initialTable);
-                            updateTotalChecked();
+                            $('#totalChecked').text("Total cards owned: " + $('input:checkbox:checked').length + "/251");
                             //Hide the login screen and display the main program
                             $("#loginScreen").hide();
                             $("#checklistScreen").show();
@@ -89,34 +78,30 @@ $(document).ready(function() {
 
     //Update database when a row was checked
     $(document).on("click", "#tableOfCards tr td", function(e) {
-        //Get the checkbox value
         let check = this.firstChild.checked;
         //Get the information for the selected card
         let row = $(this).closest("tr");
         let name = row.find("td:eq(1)").text();
         let faction = row.find("td:eq(2)").text();
-        //Create the url for the image and set it
+
         let url = faction + '/' + name + '.png';
         $("#cardPic").attr('src', url);
-        //Set all other information for the selected card
-        document.getElementById('cardName').innerHTML = name;
+        $('#cardName').text(name);
         $("#selectedText").show();
         //Check if the person clicked on the checkbox
-        if ((check === true)|| (check === false)) {
+        if (check !== undefined) {
             //Get the name of the card to update the value
             $.ajax({
                 type: 'get',
                 url: '/updateOwned',
                 data:({ownVal: check, nameVal: name}),
                 success: function(data) {
-                    updateTotalChecked();
+                    $('#totalChecked').text("Total cards owned: " + $('input:checkbox:checked').length + "/251");
                     if (check === true) {
-                        tableRow.style.color = "gray";
-                        tableRow.style.fontStyle = "italic";
+                        $(row).css({"color": "gray", "font-style": "italic"});
                     }
                     else {
-                        tableRow.style.color = "black";
-                        tableRow.style.fontStyle = "normal";
+                        $(row).css({"color": "black", "font-style": "normal"});
                     }
                 }
             });
