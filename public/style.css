@@ -226,56 +226,6 @@ h3 {
 	width:75%;
 }
 
-#all {
-	background: url("all_button.png");
-	background-position: center;
-	background-size: auto;
-	text-shadow:1px 2px 0px black;
-	color: white;
-}
-
-#monsters {
-	background: url("mon_button.png");
-	background-position: center;
-	text-shadow:1px 2px 0px black;
-	background-size: auto;
-}
-
-#neutral {
-	background: url("neu_button.png");
-	background-position: center;
-	text-shadow:1px 2px 0px black;
-	background-size: auto;
-}
-
-#nilfgaard {
-	background: url("nil_button.png");
-	background-position: center;
-	text-shadow:1px 2px 0px black;
-	background-size: auto;
-}
-
-#scoia {
-	background: url("sc_button.png");
-	background-position: center;
-	text-shadow:1px 2px 0px black;
-	background-size: auto;
-}
-
-#skellige {
-	background: url("sk_button.png");
-	background-position: center;
-	text-shadow:1px 2px 0px black;
-	background-size: auto;
-}
-
-#northernRealms {
-	background: url("nr_button.png");
-	background-position: center;
-	text-shadow:1px 2px 0px black;
-	background-size: auto;
-}
-
 #selectedCardInfo {
 	position:absolute;
 	top:28%;

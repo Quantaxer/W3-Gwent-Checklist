@@ -108,24 +108,15 @@ app.get('/fillTables', async function(req, res) {
 			for (let columnName of columnVals) {
 				resultsArr.push(await connection.query(`select ${columnName} from cards group by ${columnName}`));
 			}
+
+			let initialTableResults = await connection.query(`SELECT * FROM CARDS ORDER BY FACTION, NAME`);
 			//Tell the front end it is finished
-			res.send({searchInfo: resultsArr});
+			res.send({searchInfo: resultsArr, initialTable: initialTableResults});
 		}
 		catch(e) {
 			console.error("Error creating table: " + e);
 		}
 	});
-});
-
-//Query to populate the table upon logging in
-app.get('/populateInitialTable', async function(req, res) {
-	try {
-		let results = await connection.query(`SELECT * FROM CARDS ORDER BY FACTION, NAME`);
-		res.send(results);
-	}
-	catch(e) {
-		console.error("Error populating table: " + e);
-	}
 });
 
 //Query to update a row in the db if the userclicks a checkbox
@@ -134,29 +125,10 @@ app.get('/updateOwned', async function(req, res) {
 	let name = req.query.nameVal;
 	try {
 		await connection.query(`UPDATE CARDS SET OWNED = ${newOwned} WHERE NAME = '${name}'`);
+		res.send({g: "g"});
 	}
 	catch(e) {
 		console.error("Error updating table: " + e);
-	}
-});
-
-//endpoint that is called when a user hits a button to search by faction
-app.get('/sortTable', async function(req, res) {
-	let faction = req.query.fact;
-	try {
-		//Check if the user selected the all button
-		if (faction == "all") {
-			let rows = await connection.query(`SELECT * FROM CARDS ORDER BY FACTION, NAME`);
-			res.send(rows);
-		}
-		//Otherwise use the selected faction in the query
-		else {
-			let rows = connection.query(`SELECT * FROM CARDS WHERE (FACTION = '${faction}') ORDER BY NAME`);
-			res.send(rows);
-		}
-	}
-	catch(e) {
-		console.error(e);
 	}
 });
 
