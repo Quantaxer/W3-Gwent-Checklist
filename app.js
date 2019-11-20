@@ -45,16 +45,6 @@ app.use(express.static(publicDir));
 app.listen(portNum);
 console.log('Running app at localhost: ' + portNum);
 
-
-//Run the python script to get a JSON of all cards in the file
-app.get('/getCardInfo', function(req, res) {
-	var script = new PythonShell('scripts/infoToJSON.py');
-	script.on('message', function(message) {
-		//Send the JSON to the frontend
-		res.send({x:message});
-	});
-});
-
 //Global variables for the user's database connection
 let connection = null;
 
